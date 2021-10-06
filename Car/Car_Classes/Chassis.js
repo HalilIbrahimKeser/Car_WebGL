@@ -5,6 +5,9 @@ class Chassis extends Car {
 
     constructor(gl, camera) {
         super(gl, camera);
+        this.gl = gl;
+        this.camera = camera;
+        //this.stack = new Stack();
 
         this.torus = null;
         this.propellerShaft = null;
@@ -29,8 +32,11 @@ class Chassis extends Car {
         this.clutchBox = new Cylinder(this.gl, this.camera,{red:0.333, green: 0.105, blue:0.105, alpha:1},  false);
         this.clutchBox.initBuffers();
 
-        this.engine = new Cube(this.gl, this.camera,{red:0.333, green: 0.105, blue:0.105, alpha:1},  false);
+        this.engine = new Cube(this.gl, this.camera,{red:0.333, green: 0.235, blue:0.105, alpha:1},  false);
         this.engine.initBuffers();
+
+        this.radiator = new Cube(this.gl, this.camera,{red:0.333, green: 0.235, blue:0.204, alpha:1},  false);
+        this.radiator.initBuffers();
     }
 s
     handleKeys(currentlyPressedKey){
@@ -99,14 +105,18 @@ s
         //engine
         this.stack.peekMatrix(modelMatrix);
         modelMatrix.translate(0, 18, 0);
-        modelMatrix.scale(1, 5, 0.7);
+        modelMatrix.scale(1, 7, 0.7);
         this.clutchBox.draw(modelMatrix);
         //engine
         this.stack.peekMatrix(modelMatrix);
-        modelMatrix.translate(0, 18, 0);
-        modelMatrix.scale(1, 10, 0.7);
-        this.engine.draw(modelMatrix);
-
+        modelMatrix.translate(-3.2, 0.5, 0);
+        modelMatrix.scale(2, 2.5, 2);
+        this.engine.draw(elapsed, modelMatrix);
+        //radiator
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(0, 2, 0);
+        modelMatrix.scale(1, 0.1, 1);
+        this.radiator.draw(elapsed, modelMatrix);
 
 
 

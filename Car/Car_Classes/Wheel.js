@@ -1,15 +1,16 @@
 "use strict";
 
-class Wheel {
+class Wheel extends Car {
 
     constructor(gl, camera) {
+        super(gl, camera);
         this.gl = gl;
         this.camera = camera;
 
         this.torus = null;
         this.torusInner = null;
         this.rod = null;
-        this.stack = new Stack();
+
         this.middleCylinder = null;
         this.roundTheMiddleTire = null;
         this.torusWire = null;
