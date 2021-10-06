@@ -1,3 +1,9 @@
+/*
+GRUPPE OPPGAVE AV:
+    Nancy Agapito Lacsamana, Halil Ibrahim Keser, Asbjørn Bjørge
+ */
+
+
 "use strict";
 
 class CarApp{
@@ -140,7 +146,7 @@ class CarApp{
 
         let modelMatrix2 = new Matrix4();
         modelMatrix2.setIdentity();
-        console.log("CAR LOG: " + modelMatrix2);
+        //console.log("CAR LOG: " + modelMatrix2);
 
         modelMatrix2.setTranslate(this.translateX, this.translateY, this.translateZ);
         //modelMatrix2.rotate(this.rotateX, 1, 0, 0);
@@ -148,7 +154,7 @@ class CarApp{
         //modelMatrix2.rotate(this.rotateZ, 0, 0, 1);
         //modelMatrix2.scale(this.scaleX, this.scaleY, this.scaleZ);
 
-        this.car.draw(elapsed,modelMatrix2);
+        this.car.draw(elapsed, modelMatrix2);
 
         this.handleKeys(elapsed);
 

@@ -4,9 +4,12 @@ class Car {
     constructor(gl, camera) {
         this.gl = gl;
         this.camera = camera;
-        this.wheel = null;
 
         this.stack = new Stack();
+
+        this.wheel = null;
+        this.chassis = null;
+        this.frame = null;
 
         this.swingRotation = 0;
         this.backWheelRotation = 0;
@@ -19,6 +22,9 @@ class Car {
 
         this.chassis = new Chassis(this.gl, this.camera);
         this.chassis.initBuffers();
+
+        this.frame = new Frame(this.gl, this.camera);
+        this.frame.initBuffers();
     }
 
     handleKeys(currentlyPressedKey){
@@ -57,13 +63,19 @@ class Car {
         modelMatrix = this.stack.peekMatrix();
         modelMatrix.translate(-90, 15, 0);
         modelMatrix.rotate(this.backWheelRotation, 0, 0, 1);
-        this.wheel.draw(elapsed, modelMatrix);
-        //
+        this.wheel.draw(0.01, modelMatrix);
+
         this.stack.pushMatrix();
 
         modelMatrix = this.stack.peekMatrix();
         modelMatrix.translate(0,5,0)
         this.chassis.draw(elapsed, modelMatrix);
+
+        this.stack.pushMatrix();
+
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(0,5,0)
+        this.frame.draw(elapsed, modelMatrix);
     }
 
 }

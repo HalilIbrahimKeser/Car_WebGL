@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Car</title>
+<title>Sykkel - Modul3 - Oppg2</title>
 </head>
 
 <body>
-<p>Gruppe oppgave Halil, Nancy og Asbjørn</p>
-	<canvas id="webgl" width="1600" height="1000">
+	<canvas id="webgl" width="1300" height="1000">
 		Denne nettleseren støtter ikke "canvas"-elementet!
 	</canvas>
 
@@ -27,29 +26,24 @@
 		<br>FPS: <span id="fps">--</span><br>
 		Base-URI: <span id="uri">--</span>
 	</div>
-	<script src="../lib/webgl-utils.js"></script>
-	<script src="../lib/webgl-debug.js"></script>
-	<script src="../lib/cuon-utils.js"></script>
-	<script src="../lib/cuon-matrix.js"></script>
-	<script src="../lib/gl-matrix-min.js"></script>
-	<script src="../lib/wfa-helpers.js"></script>
-	<script src="Car_Classes/Stack.js"></script>
-	<script src="Car_Classes/Coord.js"></script>
-	<script src="Car_Classes/XZPlane.js"></script>
-	<script src="Car_Classes/Camera.js"></script>
-	<script src="Car_Classes/Cube.js"></script>
-	<script src="Car_Classes/CoordinateAxis.js"></script>
-	<script src="Car_Classes/Cylinder.js"></script>
-	<script src="Car_Classes/Circle.js"></script>
-	<script src="Car_Classes/Torus.js"></script>
-	<script src="Car_Classes/Frame.js"></script>
-	<script src="Car_Classes/CircleLines.js"></script>
-	<script src="Car_Classes/Lines.js"></script>
-	<script src="Car_Classes/Car.js"></script>
-	<script src="Car_Classes/Chassis.js"></script>
-	<script src="Car_Classes/Wheel.js"></script>
-	<script src="CarMain/CarApp.js"></script>
-
+	<script src="../../lib/webgl-utils.js"></script>
+	<script src="../../lib/webgl-debug.js"></script>
+	<script src="../../lib/cuon-utils.js"></script>
+	<script src="../../lib/cuon-matrix.js"></script>
+	<script src="../../lib/gl-matrix-min.js"></script>
+	<script src="../../lib/wfa-helpers.js"></script>
+	<script src="Modul3Oppgave2SykkelClasses/Stack.js"></script>
+	<script src="Modul3Oppgave2SykkelClasses/Coord.js"></script>
+	<script src="Modul3Oppgave2SykkelClasses/XZPlane.js"></script>
+	<script src="Modul3Oppgave2SykkelClasses/Camera.js"></script>
+	<script src="Modul3Oppgave2SykkelClasses/Cube.js"></script>
+	<script src="Modul3Oppgave2SykkelClasses/Cylinder.js"></script>
+	<script src="Modul3Oppgave2SykkelClasses/Circle.js"></script>
+	<script src="Modul3Oppgave2SykkelClasses/Torus.js"></script>
+	<script src="Modul3Oppgave2SykkelClasses/CircleLines.js"></script>
+	<script src="Modul3Oppgave2SykkelClasses/Lines.js"></script>
+	<script src="Modul3Oppgave2Sykkel/Sykkel.js"></script>
+	<script src="Modul3Oppgave2Sykkel/MyApp.js"></script>
 	<!-- SHADERS -->
 	<script id="my-vertex-shader" type="x-shader/x-vertex">
 		attribute vec3 a_Position;
@@ -72,7 +66,7 @@
 
 	<script>
 		'use strict';
-		const myApp = new CarApp();
+		const myApp = new MyApp();
 		myApp.start();
 	</script>
 

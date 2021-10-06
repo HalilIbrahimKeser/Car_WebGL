@@ -7,7 +7,6 @@ class Chassis extends Car {
         super(gl, camera);
         this.gl = gl;
         this.camera = camera;
-        //this.stack = new Stack();
 
         this.torus = null;
         this.propellerShaft = null;
@@ -38,10 +37,16 @@ class Chassis extends Car {
         this.radiator = new Cube(this.gl, this.camera,{red:0.333, green: 0.235, blue:0.204, alpha:1},  false);
         this.radiator.initBuffers();
 
-        this.frame = new Cube(this.gl, this.camera,{red:0.333, green: 0.235, blue:0.204, alpha:1},  false);
+        this.frame = new Cube(this.gl, this.camera,{red:0.120, green: 0.235, blue:0.116, alpha:1},  false);
         this.frame.initBuffers();
+
+        this.frame1 = new Cube(this.gl, this.camera,{red:0.120, green: 0.235, blue:0.116, alpha:1},  true);
+        this.frame1.initBuffers();
+
+        this.frontFrame = new Torus(this.gl, this.camera,{red:0.120, green: 0.235, blue:0.116, alpha:1},  false);
+        this.frontFrame.initBuffers();
     }
-s
+
     handleKeys(currentlyPressedKey){
 
     }
@@ -91,6 +96,9 @@ s
         modelMatrix.rotate(90, 0, 1, 0);
         this.universialJoint.draw(modelMatrix);
 
+        while (this.stack.length > 0) {
+            this.stack.popMatrix();
+        }
         this.stack.pushMatrix(modelMatrix);
 
         //gearBox
@@ -121,20 +129,49 @@ s
         modelMatrix.scale(1, 0.1, 1);
         this.radiator.draw(elapsed, modelMatrix);
 
+        this.stack.empty();
         this.stack.pushMatrix(modelMatrix);
         // HUSK: I*T*O*R*S  der O = R * T
 
         //frame
+        //høyre
         this.stack.peekMatrix(modelMatrix);
-        modelMatrix.translate(0, 2, 0);
-        Matrix.rotate(90, 1, 0, 0);
-        modelMatrix.scale(1, 0.1, 1);
+        modelMatrix.translate(1.3, -87, 1.5);
+        modelMatrix.scale(0.1, 95, 0.1);
         this.frame.draw(elapsed, modelMatrix);
 
+        //venstre
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(0, 0, -30);
+        this.frame.draw(elapsed, modelMatrix);
 
-        //Tømmer stacken ...:
-        while (this.stack.length > 0)
-            matrixStack.pop();
+        //bak
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(0, -0.99, 15);
+        modelMatrix.rotate(90, 1, 0, 0);
+        modelMatrix.scale(1, 15, 0.01);
+        this.frame1.draw(elapsed, modelMatrix);
+        //bak2
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(0, 0, -20);
+        modelMatrix.scale(1, 1, 1);
+        this.frame1.draw(elapsed, modelMatrix);
+        //bak3
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(0, 0, -40);
+        modelMatrix.scale(1, 1, 1);
+        this.frame1.draw(elapsed, modelMatrix);
+
+        this.stack.empty();
+        this.stack.pushMatrix(modelMatrix);
+        //front
+        //TODO dette skulle gjerne vært en halv tourus
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(0, 0, -137.5);
+        modelMatrix.rotate(90, 0, 1, 0);
+        modelMatrix.scale(1, 0.8, 2);
+        this.frontFrame.draw(modelMatrix);
+
+        this.stack.empty();
     }
-
 }

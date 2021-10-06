@@ -1,6 +1,6 @@
 "use strict";
 
-class Torus{
+class Torus {
     constructor(gl, camera, color, wireFrame) {
         if (!color){
             this.color = {red:0.2, green:0.2, blue:0.2, alpha:1};
@@ -31,8 +31,8 @@ class Torus{
         for (let slice = 0; slice <= this.slices; ++slice) {
             const v = slice / this.slices;
             const slice_angle = v * 2 * Math.PI;
-            const cos_slices = Math.cos(slice_angle);
-            const sin_slices = Math.sin(slice_angle);
+            const cos_slices = Math.cos(slice_angle)/2;
+            const sin_slices = Math.sin(slice_angle)*1.15;
             const slice_rad = this.outer_rad + this.inner_rad * cos_slices;
 
             for (let loop = 0; loop <= this.loops; ++loop) {

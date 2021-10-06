@@ -21,7 +21,9 @@ class Cube {
     }
 
     initBuffers(){
-        this.cubeVertices = new Float32Array([
+
+        //TODO det er noe feil med cubene, se nøye på en av cubene. feks radiator. Halil
+        let cubeVertices = new Float32Array([
             -1, 1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
             -1, -1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
             1, 1, 1,  this.color.red, this.color.green, this.color.blue, this.color.alpha,
@@ -50,7 +52,7 @@ class Cube {
 
         this.vertexBufferCube = this.gl.createBuffer();
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.vertexBufferCube);
-        this.gl.bufferData(this.gl.ARRAY_BUFFER, this.cubeVertices, this.gl.STATIC_DRAW);
+        this.gl.bufferData(this.gl.ARRAY_BUFFER, cubeVertices, this.gl.STATIC_DRAW);
         this.vertexBufferCube.itemSize = 3;
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
 
@@ -72,7 +74,7 @@ class Cube {
         this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, null);
     }
 
-    handleKeys(currentlyPressedKey){
+    handleKeys(elapsed){
         // if needed
     }
 
