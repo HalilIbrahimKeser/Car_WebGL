@@ -61,11 +61,6 @@ class Car {
 
     draw(elapsed, modelMatrix){
         this.stack.pushMatrix(modelMatrix);
-        //console.log("For bikeFront " + this.stack.peekMatrix());
-        /*modelMatrix.translate(15, 0, 0);
-        modelMatrix.rotate(30, 0, 0, 1);
-        modelMatrix.rotate(this.swingRotation, 0, 1, 0);
-        this.bikeFront.draw(modelMatrix);*/
 
         modelMatrix = this.stack.peekMatrix();
         modelMatrix.translate(90, 15, -40);
