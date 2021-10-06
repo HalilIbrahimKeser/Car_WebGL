@@ -1,6 +1,6 @@
 "use strict";
 
-class Car{
+class Car {
     constructor(gl, camera) {
         this.gl = gl;
         this.camera = camera;
@@ -16,19 +16,22 @@ class Car{
     initBuffers(){
         this.wheel = new Wheel(this.gl, this.camera);
         this.wheel.initBuffers();
+
+        this.chassis = new Chassis(this.gl, this.camera);
+        this.chassis.initBuffers();
     }
 
     handleKeys(currentlyPressedKey){
         this.wheel.handleKeys(currentlyPressedKey);
         if(currentlyPressedKey[74]){
             // J is pressed = positiv rotasjon y-aksen til bikeFront
-            if(this.swingRotation != 100){
+            if(this.swingRotation !== 100){
                 this.swingRotation += 1;
             }
         }
         if(currentlyPressedKey[75]){
             //K is pressed = negativ rotasjon y-aksen til bikeFront
-            if(this.swingRotation != -100){
+            if(this.swingRotation !== -100){
                 this.swingRotation -= 1;
             }
         }
@@ -52,10 +55,15 @@ class Car{
 
 
         modelMatrix = this.stack.peekMatrix();
-        //modelMatrix.translate(-33, -17, 0);
+        modelMatrix.translate(-90, 15, 0);
         modelMatrix.rotate(this.backWheelRotation, 0, 0, 1);
-        this.wheel.draw(0.5, modelMatrix);
+        this.wheel.draw(elapsed, modelMatrix);
+        //
+        this.stack.pushMatrix();
 
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(0,5,0)
+        this.chassis.draw(elapsed, modelMatrix);
     }
 
 }

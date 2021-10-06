@@ -94,19 +94,14 @@ class CarApp{
             if(this.currentlyPressedKeys[70]){
                 this.rotateY += 1;
             }
-
         }
         if(this.currentlyPressedKeys[75]){
             if(this.currentlyPressedKeys[71]){
                 this.rotateY -= 1;
             }
-
-
         }
         if (this.currentlyPressedKeys[70]){
             //F is pressed
-
-
             if (this.currentlyPressedKeys[74]){
                 this.translateZ -=1;
                 this.translateX -=1;
@@ -121,8 +116,6 @@ class CarApp{
                 this.translateZ += 1;
             }
         }
-
-
     }
 
     draw(currentTime) {
@@ -131,10 +124,7 @@ class CarApp{
 
         if (currentTime === undefined)
             currentTime = 0; 	//Udefinert fÃ¸rste gang.
-
-
         if (currentTime - this.fpsData.forrigeTidsstempel >= 1000) {
-
             this.fpsData.antallFrames = 0;
             this.fpsData.forrigeTidsstempel = currentTime;
         }
@@ -144,14 +134,13 @@ class CarApp{
             elapsed = (currentTime - this.lastTime)/1000;
         this.lastTime = currentTime;
 
-
         this.gl.clear(this.gl.COLOR_BUFFER_BIT);
 
         this.coord.draw(elapsed);
 
         let modelMatrix2 = new Matrix4();
         modelMatrix2.setIdentity();
-        //console.log("" + modelMatrix2);
+        console.log("CAR LOG: " + modelMatrix2);
 
         modelMatrix2.setTranslate(this.translateX, this.translateY, this.translateZ);
         //modelMatrix2.rotate(this.rotateX, 1, 0, 0);
@@ -165,6 +154,4 @@ class CarApp{
 
         this.fpsData.antallFrames++;
     }
-
-
 }

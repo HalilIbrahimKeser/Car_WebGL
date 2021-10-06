@@ -1,6 +1,6 @@
 "use strict";
 
-class Wheel{
+class Wheel {
 
     constructor(gl, camera) {
         this.gl = gl;

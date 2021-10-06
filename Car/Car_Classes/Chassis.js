@@ -1,82 +1,119 @@
 "use strict";
 
-class Chassis {
+
+class Chassis extends Car {
 
     constructor(gl, camera) {
-        this.gl = gl;
-        this.camera = camera;
+        super(gl, camera);
 
         this.torus = null;
-        this.torusInner = null;
-        this.rod = null;
-        this.stack = new Stack();
-        this.middleCylinder = null;
-        this.roundTheMiddleTire = null;
-        this.torusWire = null;
-
-
+        this.propellerShaft = null;
     }
 
     initBuffers(){
         this.torus = new Torus(this.gl, this.camera, 0, false);
         this.torus.initBuffers();
 
-        this.torusInner = new Torus(this.gl, this.camera, {red:0.3, green: 0.3, blue: 0.3, alpha: 1}, false);
-        this.torusInner.initBuffers();
+        this.propellerShaft = new Cylinder(this.gl, this.camera,{red:0.379, green: 0.282, blue:0.282, alpha:1},  false);
+        this.propellerShaft.initBuffers();
 
-        this.torusWire = new Torus(this.gl, this.camera, {red:0.3, green: 0.3, blue: 0.3, alpha: 1}, true);
-        this.torusWire.initBuffers();
+        this.slipJoint = new Cylinder(this.gl, this.camera,{red:0.227, green: 0.152, blue:0.152, alpha:1},  false);
+        this.slipJoint.initBuffers();
 
-        this.middleCylinder = new Cylinder(this.gl, this.camera, {red:0.0, green: 0.2, blue:0.45, alpha:1});
-        this.middleCylinder.initBuffers();
+        this.universialJoint = new Cylinder(this.gl, this.camera,{red:0.227, green: 0.152, blue:0.152, alpha:1},  false);
+        this.universialJoint.initBuffers();
 
-        this.roundTheMiddleTire = new Cube(this.gl, this.camera, {red:0.5, green: 0.5, blue:0.5, alpha:1});
-        this.roundTheMiddleTire.initBuffers();
+        this.gearBox = new Cylinder(this.gl, this.camera,{red:0.227, green: 0.152, blue:0.152, alpha:1},  false);
+        this.gearBox.initBuffers();
 
-        this.rod = new Cylinder(this.gl, this.camera, {red:0.3, green:0.9, blue:0.5, alpha:1});
-        this.rod.initBuffers();
+        this.clutchBox = new Cylinder(this.gl, this.camera,{red:0.333, green: 0.105, blue:0.105, alpha:1},  false);
+        this.clutchBox.initBuffers();
+
+        this.engine = new Cube(this.gl, this.camera,{red:0.333, green: 0.105, blue:0.105, alpha:1},  false);
+        this.engine.initBuffers();
     }
-
+s
     handleKeys(currentlyPressedKey){
 
     }
 
     draw(elapsed, modelMatrix){
+        // HUSK: I*T*O*R*S  der O = R * T
+        //Navn til modellene hentet fra https://innovationdiscoveries.space/understanding-the-vehicle-chassis-system/
+        modelMatrix.setIdentity();
         this.stack.pushMatrix(modelMatrix);
 
-        modelMatrix.scale(5.5, 5.5, 10);
-        this.torus.draw(modelMatrix);
+        //propellerShaft
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(0, 15, 0);
+        modelMatrix.rotate(90, 0, 0, 1);
+        modelMatrix.scale(1.5, 13, 1.5);
+        this.propellerShaft.draw(modelMatrix);
 
-        modelMatrix = this.stack.peekMatrix();
-        modelMatrix.scale(5.55, 5.55, 10);
-        this.torusWire.draw(modelMatrix);
-
-        modelMatrix = this.stack.peekMatrix();
-        modelMatrix.scale(5, 5, 8);
-        this.torusInner.draw(modelMatrix);
-
-        modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(0, 0, 3);
+        //bak shaft
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(0, 3, 0);
         modelMatrix.rotate(90, 1, 0, 0);
-        modelMatrix.scale(3, 1, 3);
-        this.middleCylinder.draw(modelMatrix);
+        modelMatrix.scale(1, 3.5, 0.1);
+        this.propellerShaft.draw(modelMatrix);
 
-        modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(0, 6, 3);
-        modelMatrix.rotate(-20, 1, 0, 0);
-        modelMatrix.scale(3, 6, 0.5);
-        this.roundTheMiddleTire.draw(0, modelMatrix);
+        //front shaft
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(0, 0, 60);
+        this.propellerShaft.draw(modelMatrix);
 
-        for (let i = 360/5; i < 360; i+=360/5){
-            modelMatrix = this.stack.peekMatrix();
-            modelMatrix.rotate(i, 0, 0, 1);
-            modelMatrix.translate(0, 6, 3);
-            modelMatrix.rotate(-20, 1, 0, 0);
-            modelMatrix.scale(3, 6, 0.5);
-            this.roundTheMiddleTire.draw(0, modelMatrix);
-        }
+        //slipJoint
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(0, 0, -20);
+        modelMatrix.rotate(90, 1, 0, 0);
+        modelMatrix.scale(1.5, 0.8, 0.4);
+        this.slipJoint.draw(modelMatrix);
 
+        //universialJoint foran
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(0, 5, 0);
+        modelMatrix.rotate(90, 0, 1, 0);
+        modelMatrix.scale(1, 0.3, 1);
+        this.universialJoint.draw(modelMatrix);
+
+        //universialJoint bakre
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(0, -170, 0);
+        modelMatrix.rotate(90, 0, 1, 0);
+        this.universialJoint.draw(modelMatrix);
+
+        this.stack.pushMatrix(modelMatrix);
+
+        //gearBox
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(0, 179, 0);
+        modelMatrix.scale(1, 2, 1.5);
+        this.gearBox.draw(modelMatrix);
+
+        //clutchBox
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(0, 4, 0);
+        modelMatrix.scale(1, 0.5, 1.5);
+        this.clutchBox.draw(modelMatrix);
+
+        //engine
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(0, 18, 0);
+        modelMatrix.scale(1, 5, 0.7);
+        this.clutchBox.draw(modelMatrix);
+        //engine
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(0, 18, 0);
+        modelMatrix.scale(1, 10, 0.7);
+        this.engine.draw(modelMatrix);
+
+
+
+
+
+        //Tømmer stacken ...:
+        while (this.stack.length > 0)
+            matrixStack.pop();
     }
-
 
 }
