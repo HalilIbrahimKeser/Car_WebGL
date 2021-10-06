@@ -108,19 +108,20 @@ class CarApp{
         }
         if (this.currentlyPressedKeys[70]){
             //F is pressed
-            if (this.currentlyPressedKeys[74]){
+            /*if (this.currentlyPressedKeys[74]){
                 this.translateZ -=1;
                 this.translateX -=1;
             } else {
                 this.translateX += 1;
-            }
+            }*/
+            this.translateX +=1;
         }
         if (this.currentlyPressedKeys[71]){
             //G is pressed = roter hjula bakover = positiv rotasjon z-aksen
             this.translateX -= 1;
-            if(this.currentlyPressedKeys[75]){
+            /*if(this.currentlyPressedKeys[75]){
                 this.translateZ += 1;
-            }
+            }*/
         }
     }
 
