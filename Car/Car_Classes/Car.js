@@ -1,5 +1,9 @@
 "use strict";
 
+
+//Navn til modellene hentet fra https://innovationdiscoveries.space/understanding-the-vehicle-chassis-system/
+
+
 class Car {
     constructor(gl, camera) {
         this.gl = gl;
@@ -101,6 +105,7 @@ class Car {
         modelMatrix = this.stack.peekMatrix();
         modelMatrix.translate(0,5,0)
         this.frame.draw(elapsed, modelMatrix);
+
     }
 
 }
