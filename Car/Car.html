@@ -38,13 +38,17 @@
 	<script src="Car_Classes/XZPlane.js"></script>
 	<script src="Car_Classes/Camera.js"></script>
 	<script src="Car_Classes/Cube.js"></script>
+	<script src="Car_Classes/CoordinateAxis.js"></script>
 	<script src="Car_Classes/Cylinder.js"></script>
 	<script src="Car_Classes/Circle.js"></script>
 	<script src="Car_Classes/Torus.js"></script>
 	<script src="Car_Classes/CircleLines.js"></script>
 	<script src="Car_Classes/Lines.js"></script>
-	<script src="Car_App/Sykkel.js"></script>
-	<script src="Car_App/MyApp.js"></script>
+	<script src="Car_Classes/Car.js"></script>
+	<script src="Car_Classes/Chassis.js"></script>
+	<script src="Car_Classes/Wheel.js"></script>
+	<script src="CarMain/CarApp.js"></script>
+
 	<!-- SHADERS -->
 	<script id="my-vertex-shader" type="x-shader/x-vertex">
 		attribute vec3 a_Position;
@@ -67,7 +71,7 @@
 
 	<script>
 		'use strict';
-		const myApp = new MyApp();
+		const myApp = new CarApp();
 		myApp.start();
 	</script>
 

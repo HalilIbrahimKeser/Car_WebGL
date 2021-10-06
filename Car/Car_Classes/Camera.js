@@ -4,9 +4,9 @@ class Camera {
 
     constructor(canvas,
                 currentlyPressedKeys,
-                camPosX=25,
-                camPosY=7,
-                camPosZ=5,
+                camPosX=10,
+                camPosY=30,
+                camPosZ=100,
                 lookAtX=0,
                 lookAtY=0,
                 lookAtZ=0,
@@ -40,14 +40,13 @@ class Camera {
     }
 
     setCamera() {
-        // VIEW-matrisa:
+
         this.viewMatrix.setLookAt(this.camPosX, this.camPosY, this.camPosZ, this.lookAtX, this.lookAtY, this.lookAtZ, this.upX, this.upY, this.upZ);
-        // PROJECTION-matrisa: cuon-utils: Matrix4.prototype.setPerspective = function(fovy, aspect, near, far)
         this.projectionMatrix.setPerspective(45, this.canvas.width / this.canvas.height, this.near, this.far);
     }
 
     getModelViewMatrix(modelMatrix) {
-        return new Matrix4(this.viewMatrix.multiply(modelMatrix)); // NB! rekkefølge!
+        return new Matrix4(this.viewMatrix.multiply(modelMatrix));
     }
 
     setPosition(posX, posY, posZ) {
@@ -81,16 +80,16 @@ class Camera {
         let camPosVec = vec3.fromValues(this.camPosX, this.camPosY, this.camPosZ);
         //Enkel rotasjon av kameraposisjonen:
         if (this.currentlyPressedKeys[65]) {    //A
-            rotateVector(2, camPosVec, 0, 1, 0);  //Roterer camPosVec 2 grader om y-aksen.
+            rotateVector(2, camPosVec, 0, 1, 0);
         }
         if (this.currentlyPressedKeys[68]) {	//S
-            rotateVector(-2, camPosVec, 0, 1, 0);  //Roterer camPosVec 2 grader om y-aksen.
+            rotateVector(-2, camPosVec, 0, 1, 0);
         }
         if (this.currentlyPressedKeys[87]) {	//W
-            rotateVector(2, camPosVec, 1, 0, 0);  //Roterer camPosVec 2 grader om x-aksen.
+            rotateVector(2, camPosVec, 1, 0, 0);
         }
         if (this.currentlyPressedKeys[83]) {	//D
-            rotateVector(-2, camPosVec, 1, 0, 0);  //Roterer camPosVec 2 grader om x-aksen.
+            rotateVector(-2, camPosVec, 1, 0, 0);
         }
 
         //Zoom inn og ut:
