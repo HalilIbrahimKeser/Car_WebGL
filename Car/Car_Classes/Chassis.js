@@ -37,6 +37,9 @@ class Chassis extends Car {
 
         this.radiator = new Cube(this.gl, this.camera,{red:0.333, green: 0.235, blue:0.204, alpha:1},  false);
         this.radiator.initBuffers();
+
+        this.frame = new Cube(this.gl, this.camera,{red:0.333, green: 0.235, blue:0.204, alpha:1},  false);
+        this.frame.initBuffers();
     }
 s
     handleKeys(currentlyPressedKey){
@@ -118,7 +121,15 @@ s
         modelMatrix.scale(1, 0.1, 1);
         this.radiator.draw(elapsed, modelMatrix);
 
+        this.stack.pushMatrix(modelMatrix);
+        // HUSK: I*T*O*R*S  der O = R * T
 
+        //frame
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(0, 2, 0);
+        Matrix.rotate(90, 1, 0, 0);
+        modelMatrix.scale(1, 0.1, 1);
+        this.frame.draw(elapsed, modelMatrix);
 
 
         //Tømmer stacken ...:
