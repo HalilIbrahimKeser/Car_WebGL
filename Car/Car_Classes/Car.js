@@ -39,13 +39,13 @@ class Car {
         this.wheel.handleKeys(currentlyPressedKey);
         if(currentlyPressedKey[74]){
             // J is pressed = positiv rotasjon y-aksen til bikeFront
-            if(this.swingRotation !== 100){
+            if(this.swingRotation !== 50){
                 this.swingRotation += 1;
             }
         }
         if(currentlyPressedKey[75]){
             //K is pressed = negativ rotasjon y-aksen til bikeFront
-            if(this.swingRotation !== -100){
+            if(this.swingRotation !== -50){
                 this.swingRotation -= 1;
             }
         }
