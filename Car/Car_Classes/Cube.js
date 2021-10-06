@@ -23,7 +23,7 @@ class Cube {
     initBuffers(){
 
         //TODO det er noe feil med cubene, se nøye på en av cubene. feks radiator. Halil
-        let cubeVertices = new Float32Array([
+        this.cubeVertices = new Float32Array([
             -1, 1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
             -1, -1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
             1, 1, 1,  this.color.red, this.color.green, this.color.blue, this.color.alpha,
@@ -52,7 +52,7 @@ class Cube {
 
         this.vertexBufferCube = this.gl.createBuffer();
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.vertexBufferCube);
-        this.gl.bufferData(this.gl.ARRAY_BUFFER, cubeVertices, this.gl.STATIC_DRAW);
+        this.gl.bufferData(this.gl.ARRAY_BUFFER, this.cubeVertices, this.gl.STATIC_DRAW);
         this.vertexBufferCube.itemSize = 3;
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
 
@@ -114,6 +114,12 @@ class Cube {
             this.gl.drawElements(this.gl.TRIANGLE_STRIP, this.triangleStripIndices2.length, this.gl.UNSIGNED_SHORT, 0);
             this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer3);
             this.gl.drawElements(this.gl.TRIANGLE_STRIP, this.triangleStripIndices3.length, this.gl.UNSIGNED_SHORT, 0);
+            this.gl.enable(this.gl.DEPTH_TEST);
+            this.gl.depthFunc(this.gl.LEQUAL)
+            //this.gl.depthMask(false);
+            //this.gl.enable(this.gl.BLEND);
+            //this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+            this.gl.depthFunc(this.gl.DEPTH_TEST)
         }
 
     }
