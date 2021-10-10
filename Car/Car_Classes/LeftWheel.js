@@ -55,23 +55,23 @@ class LeftWheel{
         this.torusInner.draw(modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(0, 0, -3);
+        modelMatrix.translate(0, 0, -5);
         modelMatrix.rotate(90, 1, 0, 0);
         modelMatrix.scale(3, 1, 3);
         this.middleCylinder.draw(modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(0, 6, -3);
+        modelMatrix.translate(0, 6, -5);
         modelMatrix.rotate(20, 1, 0, 0);
-        modelMatrix.scale(3, 6, 0.5);
+        modelMatrix.scale(3, 5.8, 0.5);
         this.roundTheMiddleTire.draw(0, modelMatrix);
 
         for (let i = 360/5; i < 360; i+=360/5){
             modelMatrix = this.stack.peekMatrix();
             modelMatrix.rotate(i, 0, 0, 1);
-            modelMatrix.translate(0, 6, -3);
+            modelMatrix.translate(0, 6, -5);
             modelMatrix.rotate(20, 1, 0, 0);
-            modelMatrix.scale(3, 6, 0.5);
+            modelMatrix.scale(3, 5.8, 0.5);
             this.roundTheMiddleTire.draw(0, modelMatrix);
         }
 

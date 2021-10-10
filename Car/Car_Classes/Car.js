@@ -16,6 +16,8 @@ class Car {
         this.frame = null;
         this.leftWheel = null;
 
+        this.seat = null;
+
         this.swingRotation = 0;
         this.backWheelRotation = 0;
 
@@ -33,6 +35,10 @@ class Car {
 
         this.leftWheel = new LeftWheel(this.gl, this.camera);
         this.leftWheel.initBuffers();
+
+        this.seat = new Seat(this.gl, this.camera);
+        this.seat.initBuffers();
+
     }
 
     handleKeys(currentlyPressedKey){
@@ -61,6 +67,10 @@ class Car {
 
     draw(elapsed, modelMatrix){
         this.stack.pushMatrix(modelMatrix);
+
+        modelMatrix.translate(0, 15, -40);
+        modelMatrix.scale(0.7, 0.7, 0.7);
+        this.seat.draw(elapsed, modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
         modelMatrix.translate(90, 15, -40);
