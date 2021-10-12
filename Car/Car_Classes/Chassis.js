@@ -54,7 +54,7 @@ class Chassis extends Car {
     draw(elapsed, modelMatrix){
         // HUSK: I*T*O*R*S  der O = R * T
         //Navn til modellene hentet fra https://innovationdiscoveries.space/understanding-the-vehicle-chassis-system/
-        modelMatrix.setIdentity();
+        //modelMatrix.setIdentity();
         this.stack.pushMatrix(modelMatrix);
 
         //propellerShaft
