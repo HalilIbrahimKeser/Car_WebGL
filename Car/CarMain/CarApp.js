@@ -43,6 +43,15 @@ class CarApp{
             console.log("Feil ved initialisering av shaderkoden - se over koden pÃ¥ nytt.");
             return;
         }
+        /*****TEST AV LYS PÅ CUBE****/
+        /*let cubeVertexShaderSource = document.getElementById('cube-vertex-shader').innerHTML;
+        let cubeFragmentShaderSource = document.getElementById('cube-fragment-shader').innerHTML;
+        this.gl.cubeShaderProgram = createProgram(this.gl, cubeVertexShaderSource, cubeFragmentShaderSource);
+        if (!this.gl.cubeShaderProgram) {
+            console.log('Feil ved initialisering av shaderkoden. Sjekk shaderkoden.');
+            return;
+        }*/
+        /*****TEST AV LYS PÅ CUBE*****/
 
         this.gl.enable(this.gl.DEPTH_TEST);
         this.gl.depthFunc(this.gl.LESS);

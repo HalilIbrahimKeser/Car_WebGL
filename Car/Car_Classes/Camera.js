@@ -6,7 +6,7 @@ class Camera {
                 currentlyPressedKeys,
                 camPosX=10,
                 camPosY=30,
-                camPosZ=100,
+                camPosZ=150,
                 lookAtX=0,
                 lookAtY=0,
                 lookAtZ=0,
