@@ -14,7 +14,10 @@ class Frame //extends Car {
 
     initBuffers(){
         this.front = new Cube(this.gl, this.camera, {red:0.478, green: 0.0, blue: 0.0, alpha: 0.9}, false);
-        this.front.initBuffers();
+        this.front.init('my-vertex-shader', 'my-fragment-shader');
+
+        this.frontLight= new Cylinder(this.gl, this.camera, {red:0.9, green: 0.7, blue:0.1, alpha:1});
+        this.frontLight.init('my-vertex-shader', 'my-fragment-shader');
 
 
     }
@@ -158,6 +161,18 @@ class Frame //extends Car {
         modelMatrix.scale(0.5, 15, 30);
         this.front.draw(elapsed, modelMatrix);
 
+        //frontLight
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(0, -3, 18);
+        modelMatrix.rotate(90, 0, 0, 1);
+        modelMatrix.scale(7, 0.5, 7);
+        this.frontLight.draw(modelMatrix);
+
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(0, -3, -18);
+        modelMatrix.rotate(90, 0, 0, 1);
+        modelMatrix.scale(7, 0.5, 7);
+        this.frontLight.draw(modelMatrix);
 
         //this.stack.popMatrix();
 

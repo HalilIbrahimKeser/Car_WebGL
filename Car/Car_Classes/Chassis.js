@@ -14,37 +14,37 @@ class Chassis extends Car {
 
     initBuffers(){
         this.torus = new Torus(this.gl, this.camera, 0, false);
-        this.torus.initBuffers();
+        this.torus.init('my-vertex-shader', 'my-fragment-shader');
 
         this.propellerShaft = new Cylinder(this.gl, this.camera,{red:0.379, green: 0.282, blue:0.282, alpha:1},  false);
-        this.propellerShaft.initBuffers();
+        this.propellerShaft.init('my-vertex-shader', 'my-fragment-shader');;
 
         this.slipJoint = new Cylinder(this.gl, this.camera,{red:0.227, green: 0.152, blue:0.152, alpha:1},  false);
-        this.slipJoint.initBuffers();
+        this.slipJoint.init('my-vertex-shader', 'my-fragment-shader');;
 
         this.universialJoint = new Cylinder(this.gl, this.camera,{red:0.227, green: 0.152, blue:0.152, alpha:1},  false);
-        this.universialJoint.initBuffers();
+        this.universialJoint.init('my-vertex-shader', 'my-fragment-shader');;
 
         this.gearBox = new Cylinder(this.gl, this.camera,{red:0.227, green: 0.152, blue:0.152, alpha:1},  false);
-        this.gearBox.initBuffers();
+        this.gearBox.init('my-vertex-shader', 'my-fragment-shader');;
 
         this.clutchBox = new Cylinder(this.gl, this.camera,{red:0.333, green: 0.105, blue:0.105, alpha:1},  false);
-        this.clutchBox.initBuffers();
+        this.clutchBox.init('my-vertex-shader', 'my-fragment-shader');;
 
         this.engine = new Cube(this.gl, this.camera,{red:0.333, green: 0.235, blue:0.105, alpha:1},  false);
-        this.engine.initBuffers();
+        this.engine.init('my-vertex-shader', 'my-fragment-shader');;
 
         this.radiator = new Cube(this.gl, this.camera,{red:0.333, green: 0.235, blue:0.204, alpha:1},  false);
-        this.radiator.initBuffers();
+        this.radiator.init('my-vertex-shader', 'my-fragment-shader');;
 
         this.frame = new Cube(this.gl, this.camera,{red:0.120, green: 0.235, blue:0.116, alpha:1},  false);
-        this.frame.initBuffers();
+        this.frame.init('my-vertex-shader', 'my-fragment-shader');;
 
         this.frame1 = new Cube(this.gl, this.camera,{red:0.120, green: 0.235, blue:0.116, alpha:1},  true);
-        this.frame1.initBuffers();
+        this.frame1.init('my-vertex-shader', 'my-fragment-shader');;
 
         this.frontFrame = new Torus(this.gl, this.camera,{red:0.120, green: 0.235, blue:0.116, alpha:1},  false);
-        this.frontFrame.initBuffers();
+        this.frontFrame.init('my-vertex-shader', 'my-fragment-shader');;
     }
 
     handleKeys(currentlyPressedKey){

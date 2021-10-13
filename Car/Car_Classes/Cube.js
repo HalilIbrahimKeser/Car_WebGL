@@ -27,6 +27,19 @@ class Cube {
 
     }
 
+    init(vertexShaderName, fragmentShaderName){
+        let vertexShaderSource = document.getElementById(vertexShaderName).innerHTML;
+        let fragmentShaderSource = document.getElementById(fragmentShaderName).innerHTML;
+        this.cubeShaderProgram = createProgram(this.gl, vertexShaderSource, fragmentShaderSource);
+        if (!this.cubeShaderProgram){
+            console.log('Feil ved initialisering av metalCubeShaderProgram');
+        }
+        else{
+            console.log("Initializing cube")
+            this.initBuffers();
+        }
+    }
+
     initBuffers(){
 
         //TODO det er noe feil med cubene, se nøye på en av cubene. feks radiator. Halil
@@ -151,15 +164,18 @@ class Cube {
     }
 
     draw(elapsed, modelMatrix){
+        let u_modelviewMatrix = this.gl.getUniformLocation(this.cubeShaderProgram, "u_modelviewMatrix");
+        let u_projectionMatrix = this.gl.getUniformLocation(this.cubeShaderProgram, "u_projectionMatrix");
+        this.gl.useProgram(this.cubeShaderProgram);
         this.camera.setCamera();
 
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.vertexBufferCube);
-        let a_Position = this.gl.getAttribLocation(this.gl.program, "a_Position");
+        let a_Position = this.gl.getAttribLocation(this.cubeShaderProgram, "a_Position");
         let stride = (3+4) *4;
         this.gl.vertexAttribPointer(a_Position, this.vertexBufferCube.itemSize, this.gl.FLOAT, false, stride, 0);
         this.gl.enableVertexAttribArray(a_Position);
 
-        let a_Color = this.gl.getAttribLocation(this.gl.program, "a_Color");
+        let a_Color = this.gl.getAttribLocation(this.cubeShaderProgram, "a_Color");
         let colorOffset = 3 * 4;
         let colorVertexSize = 4;
         this.gl.vertexAttribPointer(a_Color, colorVertexSize, this.gl.FLOAT, false, stride, colorOffset);
@@ -189,8 +205,7 @@ class Cube {
 
 
         let modelviewMatrix = this.camera.getModelViewMatrix(modelMatrix);
-        let u_modelviewMatrix = this.gl.getUniformLocation(this.gl.program, "u_modelviewMatrix");
-        let u_projectionMatrix = this.gl.getUniformLocation(this.gl.program, "u_projectionMatrix");
+
 
         this.gl.uniformMatrix4fv(u_modelviewMatrix, false, modelviewMatrix.elements);
         this.gl.uniformMatrix4fv(u_projectionMatrix, false, this.camera.projectionMatrix.elements);

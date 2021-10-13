@@ -35,8 +35,8 @@ class Wheel extends Car {
         this.roundTheMiddleTire = new MetalCube(this.gl, this.camera, {red:0.5, green: 0.5, blue:0.5, alpha:1});
         this.roundTheMiddleTire.init('metalcube-vertex-shader', 'metalcube-fragment-shader');
 
-        this.rod = new Cylinder(this.gl, this.camera, {red:0.3, green:0.9, blue:0.5, alpha:1});
-        this.rod.initBuffers();
+        //this.rod = new Cylinder(this.gl, this.camera, {red:0.3, green:0.9, blue:0.5, alpha:1});
+        //this.rod.initBuffers();
     }
 
     handleKeys(currentlyPressedKey){

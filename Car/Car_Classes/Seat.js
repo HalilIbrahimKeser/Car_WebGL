@@ -12,13 +12,13 @@ class Seat{
 
     initBuffers(){
         this.cylinder = new Cylinder(this.gl, this.camera, {red:0.9, green: 0.7, blue:0.1, alpha:1});
-        this.cylinder.initBuffers();
+        this.cylinder.init('my-vertex-shader', 'my-fragment-shader');
 
         this.cylinderDark = new Cylinder(this.gl, this.camera, {red:0.3, green: 0.3, blue:0.3, alpha:1});
-        this.cylinderDark.initBuffers();
+        this.cylinderDark.init('my-vertex-shader', 'my-fragment-shader');
 
         this.cube = new Cube(this.gl, this.camera, {red:0.9, green: 0.7, blue:0.1, alpha:1});
-        this.cube.initBuffers();
+        this.cube.init('my-vertex-shader', 'my-fragment-shader');
     }
 
     draw(elapsed, modelMatrix){
