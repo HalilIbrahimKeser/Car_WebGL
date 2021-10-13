@@ -18,13 +18,13 @@ class LeftWheel{
 
     initBuffers(){
         this.torus = new Torus(this.gl, this.camera, 0, false);
-        this.torus.initBuffers();
+        this.torus.init('my-vertex-shader', 'my-fragment-shader');
 
         this.torusInner = new Torus(this.gl, this.camera, {red:0.3, green: 0.3, blue: 0.3, alpha: 1}, false);
-        this.torusInner.initBuffers();
+        this.torusInner.init('my-vertex-shader', 'my-fragment-shader');
 
         this.torusWire = new Torus(this.gl, this.camera, {red:0.3, green: 0.3, blue: 0.3, alpha: 1}, true);
-        this.torusWire.initBuffers();
+        this.torusWire.init('my-vertex-shader', 'my-fragment-shader');
 
         this.middleCylinder = new Cylinder(this.gl, this.camera, {red:0.0, green: 0.2, blue:0.45, alpha:1});
         this.middleCylinder.initBuffers();
@@ -32,8 +32,8 @@ class LeftWheel{
         this.roundTheMiddleTire = new Cube(this.gl, this.camera, {red:0.5, green: 0.5, blue:0.5, alpha:1});
         this.roundTheMiddleTire.initBuffers();
 
-        this.rod = new Cylinder(this.gl, this.camera, {red:0.3, green:0.9, blue:0.5, alpha:1});
-        this.rod.initBuffers();
+        //this.rod = new Cylinder(this.gl, this.camera, {red:0.3, green:0.9, blue:0.5, alpha:1});
+        //this.rod.initBuffers();
     }
 
     handleKeys(currentlyPressedKey){

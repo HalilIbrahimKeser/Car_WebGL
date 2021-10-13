@@ -21,19 +21,19 @@ class Wheel extends Car {
 
     initBuffers(){
         this.torus = new Torus(this.gl, this.camera, 0, false);
-        this.torus.initBuffers();
+        this.torus.init('my-vertex-shader', 'my-fragment-shader');
 
         this.torusInner = new Torus(this.gl, this.camera, {red:0.3, green: 0.3, blue: 0.3, alpha: 1}, false);
-        this.torusInner.initBuffers();
+        this.torusInner.init('my-vertex-shader', 'my-fragment-shader');
 
         this.torusWire = new Torus(this.gl, this.camera, {red:0.3, green: 0.3, blue: 0.3, alpha: 1}, true);
-        this.torusWire.initBuffers();
+        this.torusWire.init('my-vertex-shader', 'my-fragment-shader');
 
         this.middleCylinder = new Cylinder(this.gl, this.camera, {red:0.0, green: 0.2, blue:0.45, alpha:1});
-        this.middleCylinder.initBuffers();
+        this.middleCylinder.init('my-vertex-shader', 'my-fragment-shader');
 
-        this.roundTheMiddleTire = new Cube(this.gl, this.camera, {red:0.5, green: 0.5, blue:0.5, alpha:1});
-        this.roundTheMiddleTire.initBuffers();
+        this.roundTheMiddleTire = new MetalCube(this.gl, this.camera, {red:0.5, green: 0.5, blue:0.5, alpha:1});
+        this.roundTheMiddleTire.init('metalcube-vertex-shader', 'metalcube-fragment-shader');
 
         this.rod = new Cylinder(this.gl, this.camera, {red:0.3, green:0.9, blue:0.5, alpha:1});
         this.rod.initBuffers();
@@ -67,7 +67,7 @@ class Wheel extends Car {
         modelMatrix.translate(0, 6, 5);
         modelMatrix.rotate(-20, 1, 0, 0);
         modelMatrix.scale(3, 5.8, 0.5);
-        this.roundTheMiddleTire.draw(0, modelMatrix);
+        this.roundTheMiddleTire.draw(elapsed, modelMatrix);
 
         for (let i = 360/5; i < 360; i+=360/5){
             modelMatrix = this.stack.peekMatrix();
@@ -75,7 +75,7 @@ class Wheel extends Car {
             modelMatrix.translate(0, 6, 5);
             modelMatrix.rotate(-20, 1, 0, 0);
             modelMatrix.scale(3, 5.8, 0.5);
-            this.roundTheMiddleTire.draw(0, modelMatrix);
+            this.roundTheMiddleTire.draw(elapsed, modelMatrix);
         }
 
     }

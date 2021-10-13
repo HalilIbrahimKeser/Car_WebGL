@@ -36,13 +36,13 @@ class CarApp{
 
     start() {
         this.initContext();
-
+        /*
         let vertexShaderSource = document.getElementById("my-vertex-shader").innerHTML;
         let fragmentShaderSource = document.getElementById("my-fragment-shader").innerHTML;
         if (!initShaders(this.gl, vertexShaderSource, fragmentShaderSource)) {
             console.log("Feil ved initialisering av shaderkoden - se over koden pÃ¥ nytt.");
             return;
-        }
+        }*/
         /*****TEST AV LYS PÅ CUBE****/
         /*let cubeVertexShaderSource = document.getElementById('cube-vertex-shader').innerHTML;
         let cubeFragmentShaderSource = document.getElementById('cube-fragment-shader').innerHTML;
@@ -60,7 +60,7 @@ class CarApp{
         this.camera.setCamera();
 
         this.coord = new CoordinateAxis(this.gl, this.camera, 0, 0, 0);
-        this.coord.initBuffers();
+        this.coord.init('my-vertex-shader', 'my-fragment-shader');
 
         this.car = new Car(this.gl, this.camera);
         this.car.initBuffers();

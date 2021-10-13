@@ -52,6 +52,8 @@
 	<script src="Car_Classes/LeftWheel.js"></script>
 	<script src="CarMain/CarApp.js"></script>
 	<script src="Car_Classes/Seat.js"></script>
+	<script src="Car_Classes/MetalCube.js"></script>
+	<script src="Car_Classes/ShinyCube.js"></script>
 
 	<!-- SHADERS -->
 	<script id="my-vertex-shader" type="x-shader/x-vertex">
@@ -74,7 +76,7 @@
 	</script>
 
 	<!-- CUBE SHADERS -->
-	<!--<script id="cube-vertex-shader" type="x-shader/x-vertex">
+	<script id="metalcube-vertex-shader" type="x-shader/x-vertex">
 		attribute vec3 a_Position;
 		attribute vec3 a_Normal;    //Normalvektor.
 
@@ -106,15 +108,66 @@
 			v_Color = a_Color;
 		}
 	</script>
-	<script id="cube-fragment-shader" type="x-shader/x-fragment">
+	<script id="metalcube-fragment-shader" type="x-shader/x-fragment">
 		precision mediump float;
 		varying vec3 v_LightWeighting;
 		varying vec4 v_Color;
 		void main() {
 			gl_FragColor = vec4(v_LightWeighting.rgb, 1.0);
 		}
-	</script>-->
+	</script>
 	<!--END AV CUBESHADERS-->
+
+	<script id="reflectioncube-vertex-shader" type="x-shader/x-vertex">
+		attribute vec3 a_Position;
+		attribute vec3 a_Normal;
+		attribute vec4 a_Color;
+		uniform mat4 u_modelMatrix;
+		uniform mat4 u_modelviewMatrix;
+		uniform mat4 u_projectionMatrix;
+		uniform mat3 u_normalMatrix;   //Transformerer normalvektoren vha. denne.
+		uniform vec3 u_cameraPosition; //Kameraposisjon.
+		uniform vec3 u_lightPosition;  //Lyskildeposisjon, punktlys.
+		uniform vec3 u_ambientLightColor;
+		uniform vec3 u_specularLightColor;
+		varying vec3 v_LightWeighting;
+		const float shininess = 32.0;
+		const float intensity = 3.0;
+		//FRA: https://en.wikibooks.org/wiki/GLSL_Programming/GLUT/Specular_Highlights
+		varying vec4 v_Color;
+
+		void main() {
+			//Transformerer og normaliser normalvektoren.
+			vec3 normalVector = normalize(u_normalMatrix * a_Normal);
+			//NB! Bruker world-matrisa til å transforere posisjonen.
+			vec4 postionInWorldCoords = u_modelMatrix * vec4(a_Position, 1.0);
+			vec3 viewDirection = normalize(u_cameraPosition -  vec3(postionInWorldCoords));
+			vec3 lightDirection = normalize(u_lightPosition - vec3(postionInWorldCoords));	//= normalize(u_lightPosition);
+			vec3 specularReflection;
+			if (dot(normalVector, lightDirection) < 0.0) {
+				// Lyskilden er på feil side?
+				specularReflection = vec3(0.0, 0.0, 0.0);	// Ingen specular refleksjon
+			} else {
+				vec3 reflectedVector = normalize(reflect(-lightDirection, normalVector));
+				float cosAngle = max(0.0, dot(reflectedVector, viewDirection));
+				specularReflection = intensity * vec3(u_specularLightColor) *  pow(cosAngle, shininess);
+			}
+			//Totalt lys/refleksjon fra denne verteksen:
+			v_LightWeighting = u_ambientLightColor + specularReflection;
+			//Transformer vertex:
+			gl_Position = u_projectionMatrix * u_modelviewMatrix * vec4(a_Position, 1.0);
+			v_Color = a_Color;
+		}
+	</script>
+	<script id="reflectioncube-fragment-shader" type="x-shader/x-fragment">
+		precision mediump float;
+		varying vec3 v_LightWeighting;
+		varying vec4 v_Color;
+		//kommentar
+		void main() {
+			gl_FragColor = vec4(v_LightWeighting.rgb, 1.0);
+		}
+	</script>
 
 
 	<script>

@@ -27,6 +27,20 @@ class Torus {
     }
 
 
+    init(vertexShaderName, fragmentShaderName){
+        let vertexShaderSource = document.getElementById(vertexShaderName).innerHTML;
+        let fragmentShaderSource = document.getElementById(fragmentShaderName).innerHTML;
+        this.torusShaderProgram = createProgram(this.gl, vertexShaderSource, fragmentShaderSource);
+        if (!this.torusShaderProgram){
+            console.log('Feil ved initialisering av metalCubeShaderProgram');
+        }
+        else{
+            console.log("Initializing cube")
+            this.initBuffers();
+        }
+    }
+
+
     initBuffers(){
         for (let slice = 0; slice <= this.slices; ++slice) {
             const v = slice / this.slices;
@@ -95,22 +109,25 @@ class Torus {
 
 
     draw(modelMatrix){
+        let u_modelviewMatrix = this.gl.getUniformLocation(this.torusShaderProgram, "u_modelviewMatrix");
+        let u_projectionMatrix = this.gl.getUniformLocation(this.torusShaderProgram, "u_projectionMatrix");
+        this.gl.useProgram(this.torusShaderProgram);
+
         this.camera.setCamera();
+
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.vertexBuffer);
-        let a_Position = this.gl.getAttribLocation(this.gl.program, "a_Position");
+        let a_Position = this.gl.getAttribLocation(this.torusShaderProgram, "a_Position");
         let stride = (3+4) *4;
         this.gl.vertexAttribPointer(a_Position, this.vertexBuffer.itemSize, this.gl.FLOAT, false, stride, 0);
         this.gl.enableVertexAttribArray(a_Position);
 
-        let a_Color = this.gl.getAttribLocation(this.gl.program, "a_Color");
+        let a_Color = this.gl.getAttribLocation(this.torusShaderProgram, "a_Color");
         let colorOffset = 3 * 4;
         let colorVertexSize = 4;
         this.gl.vertexAttribPointer(a_Color, colorVertexSize, this.gl.FLOAT, false, stride, colorOffset);
         this.gl.enableVertexAttribArray(a_Color);
 
         let modelviewMatrix = this.camera.getModelViewMatrix(modelMatrix);
-        let u_modelviewMatrix = this.gl.getUniformLocation(this.gl.program, "u_modelviewMatrix");
-        let u_projectionMatrix = this.gl.getUniformLocation(this.gl.program, "u_projectionMatrix");
         this.gl.uniformMatrix4fv(u_modelviewMatrix, false, modelviewMatrix.elements);
         this.gl.uniformMatrix4fv(u_projectionMatrix, false, this.camera.projectionMatrix.elements);
 
