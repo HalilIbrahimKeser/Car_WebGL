@@ -1,6 +1,6 @@
 "use strict";
 
-class Wheel extends Car {
+class RightWheel extends Car {
 
     constructor(gl, camera) {
         super(gl, camera);

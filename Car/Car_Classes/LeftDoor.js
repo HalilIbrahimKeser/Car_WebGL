@@ -1,6 +1,6 @@
 "use strict";
 
-class Doors //extends Car {
+class LeftDoor //extends Car {
 {
     constructor(gl, camera) {
         //super(gl, camera);
@@ -11,15 +11,11 @@ class Doors //extends Car {
     }
 
     initBuffers(){
-
-        //midlertidig farge. Slett første bruk nummer 2
-        this.frontDoor = new CubeTransparent(this.gl, this.camera, {red:0.478, green: 0.2, blue: 0.0, alpha: 0.8}, false);
-        //this.frontDoor = new CubeTransparent(this.gl, this.camera, {red:0.478, green: 0.0, blue: 0.0, alpha: 0.8}, false);
+        this.frontDoor = new CubeTransparent(this.gl, this.camera, {red:0.400, green: 0.0, blue: 0.0, alpha: 0.8}, false);
         this.frontDoor.init('my-vertex-shader', 'my-fragment-shader');
 
-        this.frontDoor1 = new CubeTransparent(this.gl, this.camera, {red:0.2, green: 0.0, blue: 0.4, alpha: 0.8}, false);
-        //this.frontDoor = new CubeTransparent(this.gl, this.camera, {red:0.478, green: 0.0, blue: 0.0, alpha: 0.8}, false);
-        this.frontDoor1.init('my-vertex-shader', 'my-fragment-shader');
+        this.handle = new CubeTransparent(this.gl, this.camera, {red:0.3, green: 0.0, blue: 0.4, alpha: 0.8}, false);
+        this.handle.init('my-vertex-shader', 'my-fragment-shader');
     }
 
     handleKeys(currentlyPressedKey){
@@ -59,7 +55,7 @@ class Doors //extends Car {
         this.stack.peekMatrix(modelMatrix);
         modelMatrix.translate(-2, -19, 1.5);
         modelMatrix.scale(0.5, 2, 0.1);
-        this.frontDoor1.draw(elapsed, modelMatrix);
+        this.handle.draw(elapsed, modelMatrix);
 
 
 

@@ -187,9 +187,6 @@ class Frame //extends Car {
         modelMatrix.scale(7, 0.5, 7);
         this.frontLight.draw(modelMatrix);
 
-        this.stack.pushMatrix(modelMatrix);
-        this.stack.popMatrix();
-
         //chassis overlag
         modelMatrix = this.stack.peekMatrix();
         modelMatrix.translate(-80, -19, 0);
@@ -249,6 +246,18 @@ class Frame //extends Car {
         modelMatrix = this.stack.peekMatrix();
         modelMatrix.translate(-82, 2, -33);
         this.doorHinges.draw(modelMatrix)
+
+        //back side of the back-right door
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(-121.7, -2, 34);
+        modelMatrix.scale(12, 13, 1);
+        this.carFrame.draw(elapsed, modelMatrix);
+
+        //back side of the back-left door
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(-121.7, -2, -34);
+        modelMatrix.scale(12, 13, 1);
+        this.carFrame.draw(elapsed, modelMatrix);
 
 
         this.stack.empty();

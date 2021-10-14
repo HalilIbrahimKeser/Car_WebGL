@@ -16,10 +16,11 @@ class Car {
 
         this.swingRotation = 0;
         this.backWheelRotation = 0;
+        this.doorRotation = 0;
     }
 
     initBuffers(){
-        this.wheel = new Wheel(this.gl, this.camera);
+        this.wheel = new RightWheel(this.gl, this.camera);
         this.wheel.initBuffers();
 
         this.chassis = new Chassis(this.gl, this.camera);
@@ -34,8 +35,17 @@ class Car {
         this.seat = new Seat(this.gl, this.camera);
         this.seat.initBuffers();
 
-        this.door = new Doors(this.gl, this.camera);
-        this.door.initBuffers();
+        this.leftDoor = new LeftDoor(this.gl, this.camera);
+        this.leftDoor.initBuffers();
+
+        this.rightDoor = new RightDoor(this.gl, this.camera);
+        this.rightDoor.initBuffers();
+
+        this.leftDoorBack = new LeftDoorBack(this.gl, this.camera);
+        this.leftDoorBack.initBuffers();
+
+        this.rightDoorBack = new RightDoorBack(this.gl, this.camera);
+        this.rightDoorBack.initBuffers();
     }
 
     handleKeys(currentlyPressedKey){
@@ -60,6 +70,18 @@ class Car {
             //G is pressed = roter hjula bakover = positiv rotasjon z-aksen
             this.backWheelRotation += 1;
         }
+        if (currentlyPressedKey[79]){
+            //O is pressed = roter hjula framover = negativ rotasjon z-aksen
+            if(this.doorRotation !== 0){
+                this.doorRotation -= 1;
+            }
+        }
+        if (currentlyPressedKey[80]){
+            //P is pressed = roter hjula bakover = positiv rotasjon z-aksen
+            if(this.doorRotation !== 120){
+                this.doorRotation += 1;
+            }
+        }
     }
 
     draw(elapsed, modelMatrix){
@@ -69,6 +91,7 @@ class Car {
         modelMatrix.translate(-8, 39, -18);
         modelMatrix.scale(0.6, 0.7, 0.7);
         this.seat.draw(elapsed, modelMatrix);
+
 
         //right front seat
         modelMatrix = this.stack.peekMatrix();
@@ -116,14 +139,10 @@ class Car {
         modelMatrix.rotate(this.backWheelRotation, 0, 0, 1);
         this.wheel.draw(0.01, modelMatrix);
 
-        //this.stack.pushMatrix();
-
         //Chassis
         modelMatrix = this.stack.peekMatrix();
         //modelMatrix.translate(0,5,0)
         this.chassis.draw(elapsed, modelMatrix);
-
-        this.stack.pushMatrix();
 
         //Frame
         modelMatrix = this.stack.peekMatrix();
@@ -131,18 +150,34 @@ class Car {
         modelMatrix.scale(0.65, 0.7, 0.7);
         this.frame.draw(elapsed, modelMatrix);
 
-        this.stack.pushMatrix();
-
+        //Left Door
         modelMatrix = this.stack.peekMatrix();
         modelMatrix.translate(17,19,25)
+        modelMatrix.rotate(this.doorRotation, 0, 1, 0);
         modelMatrix.scale(0.65, 0.7, 0.7);
-        this.door.draw(elapsed, modelMatrix);
+        this.leftDoor.draw(elapsed, modelMatrix);
+
+        //Right Door
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(17,19,-25)
+        modelMatrix.rotate(-this.doorRotation, 0, 1, 0);
+        modelMatrix.scale(0.65, 0.7, 0.7);
+        this.rightDoor.draw(elapsed, modelMatrix);
+
+        //Left Door Back
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(-8,19,24)
+        modelMatrix.rotate(this.doorRotation, 0, 1, 0);
+        modelMatrix.scale(0.65, 0.7, 0.7);
+        this.leftDoorBack.draw(elapsed, modelMatrix);
+
+        //Right Door Back
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(-8,19,-24)
+        modelMatrix.rotate(-this.doorRotation, 0, 1, 0);
+        modelMatrix.scale(0.65, 0.7, 0.7);
+        this.rightDoorBack.draw(elapsed, modelMatrix);
 
         this.stack.pushMatrix();
-
-        modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(17,19,25)
-        modelMatrix.scale(0.65, 0.7, 0.7);
-        this.door.draw(elapsed, modelMatrix);
     }
 }
