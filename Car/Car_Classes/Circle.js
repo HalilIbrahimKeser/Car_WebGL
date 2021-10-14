@@ -16,6 +16,19 @@ class Circle {
         this.noVertsCircle = 0;
     }
 
+    init(vertexShaderName, fragmentShaderName){
+        let vertexShaderSource = document.getElementById(vertexShaderName).innerHTML;
+        let fragmentShaderSource = document.getElementById(fragmentShaderName).innerHTML;
+        this.cubeShaderProgram = createProgram(this.gl, vertexShaderSource, fragmentShaderSource);
+        if (!this.cubeShaderProgram){
+            console.log('Feil ved initialisering av metalCubeShaderProgram');
+        }
+        else{
+            console.log("Initializing cube")
+            this.initBuffers();
+        }
+    }
+
     initBuffers() {
         this.initCircleVertices();
         this.vertexBufferCircle = this.gl.createBuffer();

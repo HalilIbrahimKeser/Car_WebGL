@@ -46,6 +46,9 @@ class Car {
 
         this.rightDoorBack = new RightDoorBack(this.gl, this.camera);
         this.rightDoorBack.initBuffers();
+
+        this.steering = new Steering(this.gl, this.camera);
+        this.steering.initBuffers();
     }
 
     handleKeys(currentlyPressedKey){
@@ -177,6 +180,12 @@ class Car {
         modelMatrix.rotate(-this.doorRotation, 0, 1, 0);
         modelMatrix.scale(0.65, 0.7, 0.7);
         this.rightDoorBack.draw(elapsed, modelMatrix);
+
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(13,38,-12)
+        modelMatrix.rotate(-20, 0, 0, 1);
+        modelMatrix.scale(0.5, 0.5, 0.5);
+        this.steering.draw(elapsed, modelMatrix);
 
         this.stack.pushMatrix();
     }
