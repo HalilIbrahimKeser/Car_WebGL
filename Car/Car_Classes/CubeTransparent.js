@@ -1,11 +1,11 @@
 "use strict";
 
-class Cube {
+class CubeTransparent {
     constructor(gl, camera, color) {
         this.gl = gl;
         this.camera = camera;
         if(!color)
-            this.color={red:0.2, green:0.5, blue: 0.5, alpha:1};
+            this.color={red:0.2, green:0.5, blue: 0.5, alpha:0.5};
         else
             this.color = color;
         this.vertexBufferCube = null;
@@ -42,7 +42,6 @@ class Cube {
 
     initBuffers(){
 
-        //TODO det er noe feil med cubene, se nøye på en av cubene. feks radiator. Halil
         this.cubeVertices = new Float32Array([
             -1, 1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
             -1, -1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,

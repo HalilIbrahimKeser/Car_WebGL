@@ -69,30 +69,30 @@ class Car {
         this.stack.pushMatrix(modelMatrix);
 
         //left front seat
-        modelMatrix.translate(-7, 38, -18);
+        modelMatrix.translate(-7, 39, -18);
         modelMatrix.scale(0.6, 0.7, 0.7);
         this.seat.draw(elapsed, modelMatrix);
 
         //right front seat
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(-7, 38, 5);
+        modelMatrix.translate(-7, 39, 5);
         modelMatrix.scale(0.6, 0.7, 0.7);
         this.seat.draw(elapsed, modelMatrix);
 
         //backseats
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(-34, 38, 5);
-        modelMatrix.scale(0.6, 0.7, 0.7);
+        modelMatrix.translate(-36, 35.6, 9);
+        modelMatrix.scale(0.5, 0.6, 0.6);
         this.seat.draw(elapsed, modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(-34, 38, -7);
-        modelMatrix.scale(0.6, 0.7, 0.7);
+        modelMatrix.translate(-36, 35.6, -7);
+        modelMatrix.scale(0.5, 0.6, 0.6);
         this.seat.draw(elapsed, modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(-34, 38, -18);
-        modelMatrix.scale(0.6, 0.7, 0.7);
+        modelMatrix.translate(-36, 35.6, -19);
+        modelMatrix.scale(0.5, 0.6, 0.6);
         this.seat.draw(elapsed, modelMatrix);
 
         //wheels
