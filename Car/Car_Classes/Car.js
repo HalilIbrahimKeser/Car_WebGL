@@ -69,53 +69,53 @@ class Car {
         this.stack.pushMatrix(modelMatrix);
 
         //left front seat
-        modelMatrix.translate(-2, 38, -18);
+        modelMatrix.translate(-7, 38, -18);
         modelMatrix.scale(0.6, 0.7, 0.7);
         this.seat.draw(elapsed, modelMatrix);
 
         //right front seat
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(-2, 38, 5);
+        modelMatrix.translate(-7, 38, 5);
         modelMatrix.scale(0.6, 0.7, 0.7);
         this.seat.draw(elapsed, modelMatrix);
 
         //backseats
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(-30, 38, 5);
+        modelMatrix.translate(-34, 38, 5);
         modelMatrix.scale(0.6, 0.7, 0.7);
         this.seat.draw(elapsed, modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(-30, 38, -7);
+        modelMatrix.translate(-34, 38, -7);
         modelMatrix.scale(0.6, 0.7, 0.7);
         this.seat.draw(elapsed, modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(-30, 38, -18);
+        modelMatrix.translate(-34, 38, -18);
         modelMatrix.scale(0.6, 0.7, 0.7);
         this.seat.draw(elapsed, modelMatrix);
 
         //wheels
+        //FrontLeft
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(22, 15, -35);
+        modelMatrix.translate(39, 15, -33);
         modelMatrix.rotate(this.swingRotation, 0, 1, 0);
         modelMatrix.rotate(this.backWheelRotation, 0, 0, 1);
         this.leftWheel.draw(0.01, modelMatrix);
-
+        //FrontRight
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(22, 15, 35);
+        modelMatrix.translate(39, 15, 33);
         modelMatrix.rotate(this.swingRotation, 0, 1, 0);
         modelMatrix.rotate(this.backWheelRotation, 0, 0, 1);
         this.wheel.draw(0.01, modelMatrix);
-
-
+        //BackLeft
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(-40, 15, -35);
+        modelMatrix.translate(-39, 15, -31);
         modelMatrix.rotate(this.backWheelRotation, 0, 0, 1);
         this.leftWheel.draw(0.01, modelMatrix);
-
+        //BackRight
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(-40, 15, 35);
+        modelMatrix.translate(-39, 15, 31);
         modelMatrix.rotate(this.backWheelRotation, 0, 0, 1);
         this.wheel.draw(0.01, modelMatrix);
 

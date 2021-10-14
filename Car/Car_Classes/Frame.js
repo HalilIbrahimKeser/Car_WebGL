@@ -35,46 +35,50 @@ class Frame //extends Car {
         //this.stack.peekMatrix(modelMatrix);
         //modelMatrix.translate(44.5, 21.5, 0);
         //modelMatrix.rotate(-80, 0, 0, 1);
-        modelMatrix.translate(0, -5, 0);
-        modelMatrix.scale(0.5, 15, 30);
+        modelMatrix.translate(10, -3, 0);
+        modelMatrix.rotate(8, 0, 0, 1);
+        modelMatrix.scale(0.9, 15, 30);
         this.front.draw(elapsed, modelMatrix);
 
         //frontsideright
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(-20, -5, 32);
-        modelMatrix.rotate(8, 0, 1, 0);
-        modelMatrix.scale(20, 15, 0.5);
+        modelMatrix.translate(-16, -5, 32);
+        modelMatrix.rotate(7, 0, 1, 0);
+        modelMatrix.scale(27, 15, 0.5);
         this.front.draw(elapsed, modelMatrix);
 
         //frontsideleft
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(-20, -5, -32);
-        modelMatrix.rotate(-8, 0, 1, 0);
-        modelMatrix.scale(20, 15, 0.5);
+        modelMatrix.translate(-16, -5, -32);
+        modelMatrix.rotate(-6, 0, 1, 0);
+        modelMatrix.scale(27, 15, 0.5);
         this.front.draw(elapsed, modelMatrix);
 
         //fronttopleft
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(-21.5, 11, -18);
-        modelMatrix.rotate(-5, 1, 0, 0);
+        modelMatrix.translate(-18, 11, -18);
+        modelMatrix.rotate(-6, 1, 0, 0);
         modelMatrix.rotate(-8, 0, 1, 0);
-        modelMatrix.scale(20, 0.5, 15);
+        modelMatrix.scale(27, 0.5, 15);
         this.front.draw(elapsed, modelMatrix);
 
         //fronttopright
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(-21.5, 11, 18);
+        modelMatrix.translate(-18, 11, 18);
         modelMatrix.rotate(5, 1, 0, 0);
         modelMatrix.rotate(8, 0, 1, 0);
-        modelMatrix.scale(20, 0.5, 15);
+        modelMatrix.scale(27, 0.5, 15);
         this.front.draw(elapsed, modelMatrix);
 
         //fronttopmiddle
-        modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(-23, 12.5, 0);
+        modelMatrix = this.stack.peekMatrix();///////////
+        modelMatrix.translate(-19.5, 12.5, 0);
         //modelMatrix.rotate(-1, 0, 0, 1);
-        modelMatrix.scale(20, 0.5, 7);
+        modelMatrix.scale(27, 0.5, 7);
         this.front.draw(elapsed, modelMatrix);
+
+        this.stack.pushMatrix(modelMatrix);
+        this.stack.popMatrix();
 
         //windshieldframeright
         modelMatrix = this.stack.peekMatrix();
@@ -163,13 +167,13 @@ class Frame //extends Car {
 
         //frontLight
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(0, -3, 18);
+        modelMatrix.translate(11, -3, 18);
         modelMatrix.rotate(90, 0, 0, 1);
         modelMatrix.scale(7, 0.5, 7);
         this.frontLight.draw(modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(0, -3, -18);
+        modelMatrix.translate(11, -3, -18);
         modelMatrix.rotate(90, 0, 0, 1);
         modelMatrix.scale(7, 0.5, 7);
         this.frontLight.draw(modelMatrix);

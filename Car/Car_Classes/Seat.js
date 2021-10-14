@@ -67,7 +67,7 @@ class Seat{
 
 
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(-6, 15, 8.5);
+        modelMatrix.translate(-4.5, 13, 8.5);
         modelMatrix.rotate(90, 1,0,0);
         modelMatrix.scale(4, 4.5, 4);
         this.cylinder.draw(modelMatrix);
