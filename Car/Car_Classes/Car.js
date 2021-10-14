@@ -1,26 +1,21 @@
 "use strict";
 
-
 //Navn til modellene hentet fra https://innovationdiscoveries.space/understanding-the-vehicle-chassis-system/
-
 
 class Car {
     constructor(gl, camera) {
         this.gl = gl;
         this.camera = camera;
-
         this.stack = new Stack();
 
         this.wheel = null;
         this.chassis = null;
         this.frame = null;
         this.leftWheel = null;
-
         this.seat = null;
 
         this.swingRotation = 0;
         this.backWheelRotation = 0;
-
     }
 
     initBuffers(){
@@ -39,6 +34,8 @@ class Car {
         this.seat = new Seat(this.gl, this.camera);
         this.seat.initBuffers();
 
+        this.door = new Doors(this.gl, this.camera);
+        this.door.initBuffers();
     }
 
     handleKeys(currentlyPressedKey){
@@ -69,13 +66,13 @@ class Car {
         this.stack.pushMatrix(modelMatrix);
 
         //left front seat
-        modelMatrix.translate(-7, 39, -18);
+        modelMatrix.translate(-8, 39, -18);
         modelMatrix.scale(0.6, 0.7, 0.7);
         this.seat.draw(elapsed, modelMatrix);
 
         //right front seat
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(-7, 39, 5);
+        modelMatrix.translate(-8, 39, 5);
         modelMatrix.scale(0.6, 0.7, 0.7);
         this.seat.draw(elapsed, modelMatrix);
 
@@ -86,7 +83,7 @@ class Car {
         this.seat.draw(elapsed, modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(-36, 35.6, -7);
+        modelMatrix.translate(-36, 35.6, -5);
         modelMatrix.scale(0.5, 0.6, 0.6);
         this.seat.draw(elapsed, modelMatrix);
 
@@ -119,23 +116,33 @@ class Car {
         modelMatrix.rotate(this.backWheelRotation, 0, 0, 1);
         this.wheel.draw(0.01, modelMatrix);
 
-
-
-
-
         //this.stack.pushMatrix();
 
+        //Chassis
         modelMatrix = this.stack.peekMatrix();
         //modelMatrix.translate(0,5,0)
         this.chassis.draw(elapsed, modelMatrix);
 
-        //this.stack.pushMatrix();
+        this.stack.pushMatrix();
 
+        //Frame
         modelMatrix = this.stack.peekMatrix();
         modelMatrix.translate(45,30,0)
         modelMatrix.scale(0.65, 0.7, 0.7);
         this.frame.draw(elapsed, modelMatrix);
 
-    }
+        this.stack.pushMatrix();
 
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(17,19,25)
+        modelMatrix.scale(0.65, 0.7, 0.7);
+        this.door.draw(elapsed, modelMatrix);
+
+        this.stack.pushMatrix();
+
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(17,19,25)
+        modelMatrix.scale(0.65, 0.7, 0.7);
+        this.door.draw(elapsed, modelMatrix);
+    }
 }

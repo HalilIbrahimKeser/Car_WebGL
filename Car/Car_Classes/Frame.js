@@ -10,6 +10,9 @@ class Frame //extends Car {
         this.stack = new Stack();
 
         this.carFrame = null;
+        this.chassisOverlag = null;
+        this.frontLight = null;
+        this.doorHinges = null;
     }
 
     initBuffers(){
@@ -19,9 +22,11 @@ class Frame //extends Car {
         this.chassisOverlag = new Cube(this.gl, this.camera, {red:0.372, green: 0.239, blue: 0.420, alpha: 1}, false);
         this.chassisOverlag.init('my-vertex-shader', 'my-fragment-shader');
 
-
-        this.frontLight= new Cylinder(this.gl, this.camera, {red:0.9, green: 0.7, blue:0.1, alpha:1});
+        this.frontLight = new Cylinder(this.gl, this.camera, {red:0.9, green: 0.7, blue:0.1, alpha:1}, false);
         this.frontLight.init('my-vertex-shader', 'my-fragment-shader');
+
+        this.doorHinges = new Cylinder(this.gl, this.camera, {red:0.9, green: 0.7, blue:0.1, alpha:1}, false);
+        this.doorHinges.init('my-vertex-shader', 'my-fragment-shader');
 
 
     }
@@ -75,7 +80,7 @@ class Frame //extends Car {
         this.carFrame.draw(elapsed, modelMatrix);
 
         //fronttopmiddle
-        modelMatrix = this.stack.peekMatrix();///////////
+        modelMatrix = this.stack.peekMatrix();
         modelMatrix.translate(-19.5, 12.5, 0);
         //modelMatrix.rotate(-1, 0, 0, 1);
         modelMatrix.scale(27, 0.5, 7);
@@ -190,6 +195,61 @@ class Frame //extends Car {
         modelMatrix.translate(-80, -19, 0);
         modelMatrix.scale(90, 1, 27);
         this.chassisOverlag.draw(elapsed, modelMatrix);
+
+        //side pole right
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(-80, 10, 32);
+        modelMatrix.rotate(90, 0, 0, 1);
+        modelMatrix.scale(30, 2, 1);
+        this.carFrame.draw(elapsed, modelMatrix);
+        //side pole left
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(-80, 10, -32);
+        modelMatrix.rotate(90, 0, 0, 1);
+        modelMatrix.scale(30, 2, 1);
+        this.carFrame.draw(elapsed, modelMatrix);
+
+        //side pole down right
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(-85, -18, 32);
+        modelMatrix.scale(65, 3, 1);
+        this.carFrame.draw(elapsed, modelMatrix);
+        //side pole down left
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(-85, -18, -32);
+        modelMatrix.scale(65, 3, 1);
+        this.carFrame.draw(elapsed, modelMatrix);
+
+        //door hinge right
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(-43, -11, 36);
+        this.doorHinges.draw(modelMatrix)
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(-43, 2, 36);
+        this.doorHinges.draw(modelMatrix)
+
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(-82, -11, 33);
+        this.doorHinges.draw(modelMatrix)
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(-82, 2, 33);
+        this.doorHinges.draw(modelMatrix)
+
+        //door hinge left
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(-43, -11, -36);
+        this.doorHinges.draw(modelMatrix)
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(-43, 2, -36);
+        this.doorHinges.draw(modelMatrix)
+
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(-82, -11, -33);
+        this.doorHinges.draw(modelMatrix)
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(-82, 2, -33);
+        this.doorHinges.draw(modelMatrix)
+
 
         this.stack.empty();
     }

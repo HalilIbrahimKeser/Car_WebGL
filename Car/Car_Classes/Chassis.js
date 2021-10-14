@@ -45,6 +45,15 @@ class Chassis extends Car {
 
         this.frontFrame = new Torus(this.gl, this.camera,{red:0.120, green: 0.235, blue:0.116, alpha:1},  false);
         this.frontFrame.init('my-vertex-shader', 'my-fragment-shader');
+
+        this.frontCylinder = new Cylinder(this.gl, this.camera,{red:0.333, green: 0.105, blue:0.105, alpha:1},  false);
+        this.frontCylinder.init('my-vertex-shader', 'my-fragment-shader');
+
+        this.eksos = new Cylinder(this.gl, this.camera,{red:0.333, green: 0.105, blue:0.105, alpha:1},  false);
+        this.eksos.init('my-vertex-shader', 'my-fragment-shader');
+
+        this.eksosBoks = new Cube(this.gl, this.camera,{red:0.333, green: 0.105, blue:0.105, alpha:1},  false);
+        this.eksosBoks.init('my-vertex-shader', 'my-fragment-shader');
     }
 
     handleKeys(currentlyPressedKey){
@@ -165,13 +174,36 @@ class Chassis extends Car {
 
         this.stack.empty();
         this.stack.pushMatrix(modelMatrix);
+
         //front
-        //TODO dette skulle gjerne vært en halv tourus
         this.stack.peekMatrix(modelMatrix);
         modelMatrix.translate(0, 0, -137.5);
         modelMatrix.rotate(90, 0, 1, 0);
         modelMatrix.scale(1, 0.5, 2);
         this.frontFrame.draw(modelMatrix);
+
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(2, 0, 0);
+        modelMatrix.rotate(90, 0, 1, 0);
+        modelMatrix.scale(2, 0.5, 2);
+        this.frontCylinder.draw(modelMatrix);
+
+        //eksos
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(-1, 3, -98);
+        modelMatrix.rotate(90, 1, 0, 0);
+        modelMatrix.scale(0.8, 2, 0.3);
+        this.eksos.draw(modelMatrix);
+
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(0, 0,3);
+        this.eksos.draw(modelMatrix);
+
+        this.stack.peekMatrix(modelMatrix);
+        modelMatrix.translate(0, 5, 0);
+        modelMatrix.rotate(90, 0, 0, 1)
+        modelMatrix.scale(3, 1, 4);
+        this.eksosBoks.draw(elapsed, modelMatrix);
 
         this.stack.empty();
     }
