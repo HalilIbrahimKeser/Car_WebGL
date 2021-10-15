@@ -36,6 +36,9 @@ class Car {
 
         this.createFrameVariations();
         this.createLeftDoorVariations();
+        this.createLeftBackDoorVariations();
+        this.createRightDoorVariations();
+        this.createRBDVariations();
 
         this.leftWheel = new LeftWheel(this.gl, this.camera);
         this.leftWheel.initBuffers();
@@ -46,14 +49,14 @@ class Car {
         //this.leftDoor = new LeftDoor(this.gl, this.camera);
         //this.leftDoor.initBuffers();
 
-        this.rightDoor = new RightDoor(this.gl, this.camera);
-        this.rightDoor.initBuffers();
+        //this.rightDoor = new RightDoor(this.gl, this.camera);
+        //this.rightDoor.initBuffers();
 
-        this.leftDoorBack = new LeftDoorBack(this.gl, this.camera);
-        this.leftDoorBack.initBuffers();
+        //this.leftDoorBack = new LeftDoorBack(this.gl, this.camera);
+        //this.leftDoorBack.initBuffers();
 
-        this.rightDoorBack = new RightDoorBack(this.gl, this.camera);
-        this.rightDoorBack.initBuffers();
+        //this.rightDoorBack = new RightDoorBack(this.gl, this.camera);
+        //this.rightDoorBack.initBuffers();
 
         this.steering = new Steering(this.gl, this.camera);
         this.steering.initBuffers();
@@ -191,21 +194,21 @@ class Car {
         modelMatrix.translate(17,19,-25)
         modelMatrix.rotate(-this.doorRotation, 0, 1, 0);
         modelMatrix.scale(0.65, 0.7, 0.7);
-        this.rightDoor.draw(elapsed, modelMatrix);
+        this.drawRightDoor(elapsed,modelMatrix);
 
         //Left Door Back
         modelMatrix = this.stack.peekMatrix();
         modelMatrix.translate(-8,19,24)
         modelMatrix.rotate(this.doorRotation, 0, 1, 0);
         modelMatrix.scale(0.65, 0.7, 0.7);
-        this.leftDoorBack.draw(elapsed, modelMatrix);
+        this.drawLBDoor(elapsed, modelMatrix);
 
         //Right Door Back
         modelMatrix = this.stack.peekMatrix();
         modelMatrix.translate(-8,19,-24)
         modelMatrix.rotate(-this.doorRotation, 0, 1, 0);
         modelMatrix.scale(0.65, 0.7, 0.7);
-        this.rightDoorBack.draw(elapsed, modelMatrix);
+        this.drawRBDoor(elapsed, modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
         modelMatrix.translate(13,38,-12)
@@ -346,6 +349,201 @@ class Car {
         this.leftDoor00.initBuffers();
     }
 
+    createLeftBackDoorVariations(){
+        this.lBDoor1 = new LeftBackDoorVariation(this.gl, this.camera, 1.0);
+        this.lBDoor1.initBuffers();
+
+        this.lBDoor095 = new LeftBackDoorVariation(this.gl, this.camera, 0.95);
+        this.lBDoor095.initBuffers();
+
+        this.lBDoor09 = new LeftBackDoorVariation(this.gl, this.camera, 0.9);
+        this.lBDoor09.initBuffers();
+
+        this.lBDoor085 = new LeftBackDoorVariation(this.gl, this.camera, 0.85);
+        this.lBDoor085.initBuffers();
+
+        this.lBDoor08 = new LeftBackDoorVariation(this.gl, this.camera, 0.8);
+        this.lBDoor08.initBuffers();
+
+        this.lBDoor075 = new LeftBackDoorVariation(this.gl, this.camera, 0.75);
+        this.lBDoor075.initBuffers();
+
+        this.lBDoor07 = new LeftBackDoorVariation(this.gl, this.camera, 0.7);
+        this.lBDoor07.initBuffers();
+
+        this.lBDoor065 = new LeftBackDoorVariation(this.gl, this.camera, 0.65);
+        this.lBDoor065.initBuffers();
+
+        this.lBDoor06 = new LeftBackDoorVariation(this.gl, this.camera, 0.6);
+        this.lBDoor06.initBuffers();
+
+        this.lBDoor055 = new LeftBackDoorVariation(this.gl, this.camera, 0.55);
+        this.lBDoor055.initBuffers();
+
+        this.lBDoor05 = new LeftBackDoorVariation(this.gl, this.camera, 0.5);
+        this.lBDoor05.initBuffers();
+
+        this.lBDoor045 = new LeftBackDoorVariation(this.gl, this.camera, 0.45);
+        this.lBDoor045.initBuffers();
+
+        this.lBDoor04 = new LeftBackDoorVariation(this.gl, this.camera, 0.4);
+        this.lBDoor04.initBuffers();
+
+        this.lBDoor035 = new LeftBackDoorVariation(this.gl, this.camera, 0.35);
+        this.lBDoor035.initBuffers();
+
+        this.lBDoor03 = new LeftBackDoorVariation(this.gl, this.camera, 0.3);
+        this.lBDoor03.initBuffers();
+
+        this.lBDoor025 = new LeftBackDoorVariation(this.gl, this.camera, 0.25);
+        this.lBDoor025.initBuffers();
+
+        this.lBDoor02 = new LeftBackDoorVariation(this.gl, this.camera, 0.2);
+        this.lBDoor02.initBuffers();
+
+        this.lBDoor015 = new LeftBackDoorVariation(this.gl, this.camera, 0.15);
+        this.lBDoor015.initBuffers();
+
+        this.lBDoor01 = new LeftBackDoorVariation(this.gl, this.camera, 0.1);
+        this.lBDoor01.initBuffers();
+
+        this.lBDoor005 = new LeftBackDoorVariation(this.gl, this.camera, 0.5);
+        this.lBDoor005.initBuffers();
+
+        this.lBDoor00 = new LeftBackDoorVariation(this.gl, this.camera, 0.0);
+        this.lBDoor00.initBuffers();
+    }
+
+    createRightDoorVariations(){
+        this.rDoor1 = new RightDoorVariation(this.gl, this.camera, 1.0);
+        this.rDoor1.initBuffers();
+
+        this.rDoor095 = new RightDoorVariation(this.gl, this.camera, 0.95);
+        this.rDoor095.initBuffers();
+
+        this.rDoor09 = new RightDoorVariation(this.gl, this.camera, 0.9);
+        this.rDoor09.initBuffers();
+
+        this.rDoor085 = new RightDoorVariation(this.gl, this.camera, 0.85);
+        this.rDoor085.initBuffers();
+
+        this.rDoor08 = new RightDoorVariation(this.gl, this.camera, 0.8);
+        this.rDoor08.initBuffers();
+
+        this.rDoor075 = new RightDoorVariation(this.gl, this.camera, 0.75);
+        this.rDoor075.initBuffers();
+
+        this.rDoor07 = new RightDoorVariation(this.gl, this.camera, 0.7);
+        this.rDoor07.initBuffers();
+
+        this.rDoor065 = new RightDoorVariation(this.gl, this.camera, 0.65);
+        this.rDoor065.initBuffers();
+
+        this.rDoor06 = new RightDoorVariation(this.gl, this.camera, 0.6);
+        this.rDoor06.initBuffers();
+
+        this.rDoor055 = new RightDoorVariation(this.gl, this.camera, 0.55);
+        this.rDoor055.initBuffers();
+
+        this.rDoor05 = new RightDoorVariation(this.gl, this.camera, 0.5);
+        this.rDoor05.initBuffers();
+
+        this.rDoor045 = new RightDoorVariation(this.gl, this.camera, 0.45);
+        this.rDoor045.initBuffers();
+
+        this.rDoor04 = new RightDoorVariation(this.gl, this.camera, 0.4);
+        this.rDoor04.initBuffers();
+
+        this.rDoor035 = new RightDoorVariation(this.gl, this.camera, 0.35);
+        this.rDoor035.initBuffers();
+
+        this.rDoor03 = new RightDoorVariation(this.gl, this.camera, 0.3);
+        this.rDoor03.initBuffers();
+
+        this.rDoor025 = new RightDoorVariation(this.gl, this.camera, 0.25);
+        this.rDoor025.initBuffers();
+
+        this.rDoor02 = new RightDoorVariation(this.gl, this.camera, 0.2);
+        this.rDoor02.initBuffers();
+
+        this.rDoor015 = new RightDoorVariation(this.gl, this.camera, 0.15);
+        this.rDoor015.initBuffers();
+
+        this.rDoor01 = new RightDoorVariation(this.gl, this.camera, 0.1);
+        this.rDoor01.initBuffers();
+
+        this.rDoor005 = new RightDoorVariation(this.gl, this.camera, 0.5);
+        this.rDoor005.initBuffers();
+
+        this.rDoor00 = new RightDoorVariation(this.gl, this.camera, 0.0);
+        this.rDoor00.initBuffers();
+    }
+
+    createRBDVariations(){
+        this.rbDoor1 = new RightBackDoorVariation(this.gl, this.camera, 1.0);
+        this.rbDoor1.initBuffers();
+
+        this.rbDoor095 = new RightBackDoorVariation(this.gl, this.camera, 0.95);
+        this.rbDoor095.initBuffers();
+
+        this.rbDoor09 = new RightBackDoorVariation(this.gl, this.camera, 0.9);
+        this.rbDoor09.initBuffers();
+
+        this.rbDoor085 = new RightBackDoorVariation(this.gl, this.camera, 0.85);
+        this.rbDoor085.initBuffers();
+
+        this.rbDoor08 = new RightBackDoorVariation(this.gl, this.camera, 0.8);
+        this.rbDoor08.initBuffers();
+
+        this.rbDoor075 = new RightBackDoorVariation(this.gl, this.camera, 0.75);
+        this.rbDoor075.initBuffers();
+
+        this.rbDoor07 = new RightBackDoorVariation(this.gl, this.camera, 0.7);
+        this.rbDoor07.initBuffers();
+
+        this.rbDoor065 = new RightBackDoorVariation(this.gl, this.camera, 0.65);
+        this.rbDoor065.initBuffers();
+
+        this.rbDoor06 = new RightBackDoorVariation(this.gl, this.camera, 0.6);
+        this.rbDoor06.initBuffers();
+
+        this.rbDoor055 = new RightBackDoorVariation(this.gl, this.camera, 0.55);
+        this.rbDoor055.initBuffers();
+
+        this.rbDoor05 = new RightBackDoorVariation(this.gl, this.camera, 0.5);
+        this.rbDoor05.initBuffers();
+
+        this.rbDoor045 = new RightBackDoorVariation(this.gl, this.camera, 0.45);
+        this.rbDoor045.initBuffers();
+
+        this.rbDoor04 = new RightBackDoorVariation(this.gl, this.camera, 0.4);
+        this.rbDoor04.initBuffers();
+
+        this.rbDoor035 = new RightBackDoorVariation(this.gl, this.camera, 0.35);
+        this.rbDoor035.initBuffers();
+
+        this.rbDoor03 = new RightBackDoorVariation(this.gl, this.camera, 0.3);
+        this.rbDoor03.initBuffers();
+
+        this.rbDoor025 = new RightBackDoorVariation(this.gl, this.camera, 0.25);
+        this.rbDoor025.initBuffers();
+
+        this.rbDoor02 = new RightBackDoorVariation(this.gl, this.camera, 0.2);
+        this.rbDoor02.initBuffers();
+
+        this.rbDoor015 = new RightBackDoorVariation(this.gl, this.camera, 0.15);
+        this.rbDoor015.initBuffers();
+
+        this.rbDoor01 = new RightBackDoorVariation(this.gl, this.camera, 0.1);
+        this.rbDoor01.initBuffers();
+
+        this.rbDoor005 = new RightBackDoorVariation(this.gl, this.camera, 0.5);
+        this.rbDoor005.initBuffers();
+
+        this.rbDoor00 = new RightBackDoorVariation(this.gl, this.camera, 0.0);
+        this.rbDoor00.initBuffers();
+    }
+
     drawFrame(elapsed, modelMatrix){
         switch (this.transparencyValue){
             case 100:
@@ -481,6 +679,210 @@ class Car {
                 this.leftDoor00.draw(elapsed, modelMatrix);
                 break;
 
+        }
+    }
+
+    drawLBDoor(elapsed, modelMatrix){
+        switch (this.transparencyValue){
+            case 100:
+                this.lBDoor1.draw(elapsed, modelMatrix);
+                break;
+            case 95:
+                this.lBDoor095.draw(elapsed, modelMatrix);
+                break;
+            case 90:
+                this.lBDoor09.draw(elapsed, modelMatrix);
+                break;
+            case 85:
+                this.lBDoor085.draw(elapsed, modelMatrix);
+                break;
+            case 80:
+                this.lBDoor08.draw(elapsed, modelMatrix);
+                break;
+            case 75:
+                this.lBDoor075.draw(elapsed, modelMatrix);
+                break;
+            case 70:
+                this.lBDoor07.draw(elapsed, modelMatrix);
+                break;
+            case 65:
+                this.lBDoor065.draw(elapsed, modelMatrix);
+                break;
+            case 60:
+                this.lBDoor06.draw(elapsed, modelMatrix);
+                break;
+            case 55:
+                this.lBDoor055.draw(elapsed, modelMatrix);
+                break;
+            case 50:
+                this.lBDoor05.draw(elapsed, modelMatrix);
+                break;
+            case 45:
+                this.lBDoor045.draw(elapsed, modelMatrix);
+                break;
+            case 40:
+                this.lBDoor04.draw(elapsed, modelMatrix);
+                break;
+            case 35:
+                this.lBDoor035.draw(elapsed, modelMatrix);
+                break;
+            case 30:
+                this.lBDoor03.draw(elapsed, modelMatrix);
+                break;
+            case 25:
+                this.lBDoor025.draw(elapsed, modelMatrix);
+                break;
+            case 20:
+                this.lBDoor02.draw(elapsed, modelMatrix);
+                break;
+            case 15:
+                this.lBDoor015.draw(elapsed, modelMatrix);
+                break;
+            case 10:
+                this.lBDoor01.draw(elapsed, modelMatrix);
+                break;
+            case 5:
+                this.lBDoor005.draw(elapsed, modelMatrix);
+                break;
+            case 0:
+                this.lBDoor00.draw(elapsed, modelMatrix);
+                break;
+        }
+    }
+
+    drawRightDoor(elapsed, modelMatrix){
+        switch (this.transparencyValue){
+            case 100:
+                this.rDoor1.draw(elapsed, modelMatrix);
+                break;
+            case 95:
+                this.rDoor095.draw(elapsed, modelMatrix);
+                break;
+            case 90:
+                this.rDoor09.draw(elapsed, modelMatrix);
+                break;
+            case 85:
+                this.rDoor085.draw(elapsed, modelMatrix);
+                break;
+            case 80:
+                this.rDoor08.draw(elapsed, modelMatrix);
+                break;
+            case 75:
+                this.rDoor075.draw(elapsed, modelMatrix);
+                break;
+            case 70:
+                this.rDoor07.draw(elapsed, modelMatrix);
+                break;
+            case 65:
+                this.rDoor065.draw(elapsed, modelMatrix);
+                break;
+            case 60:
+                this.rDoor06.draw(elapsed, modelMatrix);
+                break;
+            case 55:
+                this.rDoor055.draw(elapsed, modelMatrix);
+                break;
+            case 50:
+                this.rDoor05.draw(elapsed, modelMatrix);
+                break;
+            case 45:
+                this.rDoor045.draw(elapsed, modelMatrix);
+                break;
+            case 40:
+                this.rDoor04.draw(elapsed, modelMatrix);
+                break;
+            case 35:
+                this.rDoor035.draw(elapsed, modelMatrix);
+                break;
+            case 30:
+                this.rDoor03.draw(elapsed, modelMatrix);
+                break;
+            case 25:
+                this.rDoor025.draw(elapsed, modelMatrix);
+                break;
+            case 20:
+                this.rDoor02.draw(elapsed, modelMatrix);
+                break;
+            case 15:
+                this.rDoor015.draw(elapsed, modelMatrix);
+                break;
+            case 10:
+                this.rDoor01.draw(elapsed, modelMatrix);
+                break;
+            case 5:
+                this.rDoor005.draw(elapsed, modelMatrix);
+                break;
+            case 0:
+                this.rDoor00.draw(elapsed, modelMatrix);
+                break;
+        }
+    }
+
+    drawRBDoor(elapsed, modelMatrix){
+        switch (this.transparencyValue){
+            case 100:
+                this.rbDoor1.draw(elapsed, modelMatrix);
+                break;
+            case 95:
+                this.rbDoor095.draw(elapsed, modelMatrix);
+                break;
+            case 90:
+                this.rbDoor09.draw(elapsed, modelMatrix);
+                break;
+            case 85:
+                this.rbDoor085.draw(elapsed, modelMatrix);
+                break;
+            case 80:
+                this.rbDoor08.draw(elapsed, modelMatrix);
+                break;
+            case 75:
+                this.rbDoor075.draw(elapsed, modelMatrix);
+                break;
+            case 70:
+                this.rbDoor07.draw(elapsed, modelMatrix);
+                break;
+            case 65:
+                this.rbDoor065.draw(elapsed, modelMatrix);
+                break;
+            case 60:
+                this.rbDoor06.draw(elapsed, modelMatrix);
+                break;
+            case 55:
+                this.rbDoor055.draw(elapsed, modelMatrix);
+                break;
+            case 50:
+                this.rbDoor05.draw(elapsed, modelMatrix);
+                break;
+            case 45:
+                this.rbDoor045.draw(elapsed, modelMatrix);
+                break;
+            case 40:
+                this.rbDoor04.draw(elapsed, modelMatrix);
+                break;
+            case 35:
+                this.rbDoor035.draw(elapsed, modelMatrix);
+                break;
+            case 30:
+                this.rbDoor03.draw(elapsed, modelMatrix);
+                break;
+            case 25:
+                this.rbDoor025.draw(elapsed, modelMatrix);
+                break;
+            case 20:
+                this.rbDoor02.draw(elapsed, modelMatrix);
+                break;
+            case 15:
+                this.rbDoor015.draw(elapsed, modelMatrix);
+                break;
+            case 10:
+                this.rbDoor01.draw(elapsed, modelMatrix);
+                break;
+            case 5:
+                this.rbDoor005.draw(elapsed, modelMatrix);
+                break;
+            case 0:
+                this.rbDoor00.draw(elapsed, modelMatrix);
+                break;
         }
     }
 

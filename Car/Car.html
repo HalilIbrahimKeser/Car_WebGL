@@ -25,20 +25,17 @@
 <!--	<div id="rotantion-velocity">-->
 <!--		Hastighet: <span id="velocity * (-1)">&#45;&#45;</span>-->
 <!--	</div>-->
-	<div class="row">
-		<div class="col-6">
-			WASD for å rotere kamera.<br>
-			VB for å zoome inn/ut<br>
-			YU for å svinge rattet<br>
-			GF for å kjøre fram og tilbake<br>
-			JK for å rotere framhjulene mot høyre/venstre<br>
-			OP for å åpne og lukke dører<br>
-		</div>
-		<div class="row">
-			<button id="opaque" onclick="" style="background-color: chartreuse; padding: 20px; font-size: large;">More Opaque</button>
-			<button id="transparent" onclick="" style="background-color: coral; padding: 20px; font-size: large;">More Transparent</button>
-		</div>
+
+	<div >
+		WASD for å rotere kamera.<br>
+		VB for å zoome inn/ut<br>
+		YU for å svinge rattet<br>
+		GF for å kjøre fram og tilbake<br>
+		JK for å rotere framhjulene mot høyre/venstre<br>
+		OP for å åpne og lukke dører<br>
 	</div>
+
+
 
 	<div id="fps-counter">
 		<br>FPS: <span id="fps">--</span><br>
@@ -78,7 +75,9 @@
 	<script src="Car_Classes/Steering.js"></script>
 	<script src="Car_Classes/FrameOpaque.js"></script>
 	<script src="Car_Classes/LeftDoorVariation.js"></script>
-
+	<script src="Car_Classes/LeftBackDoorVariation.js"></script>
+	<script src="Car_Classes/RightDoorVariation.js"></script>
+	<script src="Car_Classes/RightBackDoorVariation.js"></script>
 
 	<!-- SHADERS -->
 	<script id="my-vertex-shader" type="x-shader/x-vertex">
