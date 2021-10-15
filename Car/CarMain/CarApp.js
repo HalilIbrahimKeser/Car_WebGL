@@ -21,6 +21,10 @@ class CarApp{
         this.coord = null;
         this.car = null;
 
+        this.stack = new Stack();
+
+        this.car2 = null;
+
         this.lastTime = 0.0;
 
         this.fpsData = new Object();
@@ -33,9 +37,25 @@ class CarApp{
         this.translateY = 0;
         this.translateZ = 0;
 
+        this.car2x = -200;
+        this.car2y = 0;
+        this.car2z = -150;
+
+        this.car3x = -100;
+        this.car3y = 0;
+        this.car3z = 150;
+
+        this.car4x = -170;
+        this.car4y = 0;
+        this.car4z = -10;
+
         this.rotateX = 0;
         this.rotateY = 0;
         this.rotateZ = 0;
+
+        this.showOtherCars = false;
+
+        this.trafficBtn = null;
     }
 
     start() {
@@ -66,13 +86,37 @@ class CarApp{
         this.coord = new CoordinateAxis(this.gl, this.camera, 0, 0, 0);
         this.coord.init('my-vertex-shader', 'my-fragment-shader');
 
-        this.car = new Car(this.gl, this.camera);
+        this.car = new Car(this.gl, this.camera, {red:0.478, green:0.0, blue: 0.0},
+            {red:0.400, green: 0.0, blue: 0.0}, {red:0.3, green: 0.0, blue: 0.4});
         this.car.initBuffers();
+
+        this.car2 = new Car(this.gl, this.camera, {red:0.0, green:0.1, blue: 0.8},
+            {red:0.1, green: 0.1, blue: 0.9}, {red:0.3, green: 0.9, blue: 0.4});
+        this.car2.initBuffers();
+
+        this.car3 = new Car(this.gl, this.camera, {red:0.9, green:0.1, blue: 0.4},
+            {red:0.2, green: 0.9, blue: 0.4}, {red:0.9, green: 0.6, blue: 0.1});
+        this.car3.initBuffers();
+
+        this.car4 = new Car(this.gl, this.camera, {red:0.1, green:0.1, blue: 0.1},
+            {red:0.9, green: 0.9, blue: 0.9}, {red:0.9, green: 0.6, blue: 0.1});
+        this.car4.initBuffers();
 
         this.gl.clearColor(0.4, 0.4, 0.4, 1.0); //RGBA
 
         this.fpsData.antallFrames = 0;
         this.fpsData.forrigeTidsstempel = 0;
+
+        /*this.trafficBtn = document.getElementById("moreCars");
+        this.trafficBtn.addEventListener("click", function(){
+            console.log("clicked");
+            if(this.showOtherCars){
+                this.showOtherCars = false;
+            } else{
+                this.showOtherCars = true;
+            }
+            console.log("" + this.showOtherCars);
+        });*/
 
         this.draw();
     }
@@ -107,6 +151,9 @@ class CarApp{
     handleKeys(elapsed) {
         this.camera.handleKeys(elapsed);
         this.car.handleKeys(this.currentlyPressedKeys);
+        this.car2.handleKeys(this.currentlyPressedKeys);
+        this.car3.handleKeys(this.currentlyPressedKeys);
+        this.car4.handleKeys(this.currentlyPressedKeys);
 
         if(this.currentlyPressedKeys[74]){
             // J is pressed = positiv rotasjon y-aksen
@@ -123,10 +170,16 @@ class CarApp{
         if (this.currentlyPressedKeys[70]){
             //F is pressed
             this.translateX +=1;
+            this.car2x +=2;
+            this.car3x +=2;
+            this.car4x +=1;
         }
         if (this.currentlyPressedKeys[71]){
             //G is pressed = roter hjula bakover = positiv rotasjon z-aksen
             this.translateX -= 1;
+            this.car2x -= 2;
+            this.car3x -= 2;
+            this.car4x -=1;
         }
     }
 
@@ -152,12 +205,30 @@ class CarApp{
 
         let modelMatrix2 = new Matrix4();
         modelMatrix2.setIdentity();
+        this.stack.pushMatrix(modelMatrix2);
         //console.log("CAR LOG: " + modelMatrix2);
 
         modelMatrix2.setTranslate(this.translateX, this.translateY, this.translateZ);
         modelMatrix2.rotate(this.rotateY, 0, 1, 0);
 
         this.car.draw(elapsed, modelMatrix2);
+
+        //onclick
+        if(this.showOtherCars){
+            modelMatrix2 = this.stack.peekMatrix();
+            modelMatrix2.setTranslate(this.car2x, this.car2y, this.car2z);
+            this.car2.draw(elapsed, modelMatrix2);
+
+            modelMatrix2 = this.stack.peekMatrix();
+            modelMatrix2.setTranslate(this.car3x, this.car3y, this.car3z);
+            this.car3.draw(elapsed, modelMatrix2);
+
+            modelMatrix2 = this.stack.peekMatrix();
+            modelMatrix2.setTranslate(this.car4x, this.car4y, this.car4z);
+            this.car4.draw(elapsed, modelMatrix2);
+        }
+
+
 
         this.handleKeys(elapsed);
 

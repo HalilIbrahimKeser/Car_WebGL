@@ -2,7 +2,7 @@
 
 class FrameOpaque extends Car {
 
-    constructor(gl, camera, transparency) {
+    constructor(gl, camera, transparency, color) {
         super(gl, camera);
         this.gl = gl;
         this.camera = camera;
@@ -14,12 +14,17 @@ class FrameOpaque extends Car {
         this.frontLight = null;
         this.doorHinges = null;
 
+        if(!color)
+            this.color={red:0.478, green:0.0, blue: 0.0};
+        else
+            this.color = color;
+
         this.transparency = transparency
 
     }
 
     initBuffers(){
-        this.carFrame = new CubeTransparent(this.gl, this.camera, {red:0.478, green: 0.0, blue: 0.0, alpha: this.transparency}, false);
+        this.carFrame = new CubeTransparent(this.gl, this.camera, {red:this.color.red, green: this.color.green, blue: this.color.blue, alpha: this.transparency}, false);
         this.carFrame.init('my-vertex-shader', 'my-fragment-shader');
 
         this.chassisOverlag = new CubeTransparent(this.gl, this.camera, {red:0.372, green: 0.239, blue: 0.420, alpha: this.transparency}, false);
