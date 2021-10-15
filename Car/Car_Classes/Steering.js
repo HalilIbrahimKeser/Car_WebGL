@@ -13,8 +13,6 @@ class Steering extends Car {
         this.middleCylinder = null;
         this.roundTheMiddleTire = null;
         this.torusWire = null;
-
-
     }
 
     initBuffers(){
@@ -30,7 +28,7 @@ class Steering extends Car {
         this.steeringRot = new Cylinder(this.gl, this.camera, {red:0.2, green: 0.2, blue: 0.2, alpha: 1}, false);
         this.steeringRot.init('my-vertex-shader', 'my-fragment-shader');
 
-        this.steeringBox = new Cube(this.gl, this.camera, {red:0.2, green: 0.2, blue: 0.2, alpha: 1});
+        this.steeringBox = new ShinyCube(this.gl, this.camera, {red:0.2, green: 0.2, blue: 0.2, alpha: 1});
         this.steeringBox.init('my-vertex-shader', 'my-fragment-shader');
     }
 
@@ -61,5 +59,7 @@ class Steering extends Car {
         modelMatrix.rotate(20, 0, 0, 1);
         modelMatrix.scale(10, 10, 10);
         this.steeringBox.draw(elapsed, modelMatrix);
+
+        this.stack.pushMatrix(modelMatrix);
     }
 }

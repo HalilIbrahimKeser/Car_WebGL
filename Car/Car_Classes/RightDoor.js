@@ -1,25 +1,22 @@
 "use strict";
 
-class RightDoor //extends Car {
+class RightDoor extends Car
 {
     constructor(gl, camera) {
-        //super(gl, camera);
+        super(gl, camera);
         this.gl = gl;
         this.camera = camera;
-        this.stack = new Stack();
-
     }
 
     initBuffers(){
-        this.frontDoor = new CubeTransparent(this.gl, this.camera, {red:0.400, green: 0.0, blue: 0.0, alpha: 0.8}, false);
+        this.frontDoor = new CubeTransparent(this.gl, this.camera, {red:0.400, green: 0.0, blue: 0.0, alpha: this.transparencyAlphaValue}, false);
         this.frontDoor.init('my-vertex-shader', 'my-fragment-shader');
 
-        this.frontDoor1 = new CubeTransparent(this.gl, this.camera, {red:0.2, green: 0.0, blue: 0.4, alpha: 0.8}, false);
+        this.frontDoor1 = new CubeTransparent(this.gl, this.camera, {red:0.2, green: 0.0, blue: 0.4, alpha: this.transparencyAlphaValue}, false);
         this.frontDoor1.init('my-vertex-shader', 'my-fragment-shader');
     }
 
     handleKeys(currentlyPressedKey){
-
     }
 
     draw(elapsed, modelMatrix){

@@ -1,13 +1,13 @@
 "use strict";
 
-//TODO extends gir feil
-class Frame //extends Car {
-{
+class Frame extends Car {
+
     constructor(gl, camera) {
-        //super(gl, camera);
+        super(gl, camera);
         this.gl = gl;
         this.camera = camera;
-        this.stack = new Stack();
+        this.gl = gl;
+        this.camera = camera;
 
         this.carFrame = null;
         this.chassisOverlag = null;
@@ -16,10 +16,10 @@ class Frame //extends Car {
     }
 
     initBuffers(){
-        this.carFrame = new CubeTransparent(this.gl, this.camera, {red:0.478, green: 0.0, blue: 0.0, alpha: 0.8}, false);
+        this.carFrame = new CubeTransparent(this.gl, this.camera, {red:0.478, green: 0.0, blue: 0.0, alpha: this.transparencyAlphaValue}, false);
         this.carFrame.init('my-vertex-shader', 'my-fragment-shader');
 
-        this.chassisOverlag = new Cube(this.gl, this.camera, {red:0.372, green: 0.239, blue: 0.420, alpha: 1}, false);
+        this.chassisOverlag = new CubeTransparent(this.gl, this.camera, {red:0.372, green: 0.239, blue: 0.420, alpha: this.transparencyAlphaValue}, false);
         this.chassisOverlag.init('my-vertex-shader', 'my-fragment-shader');
 
         this.frontLight = new Cylinder(this.gl, this.camera, {red:0.9, green: 0.7, blue:0.1, alpha:1}, false);
@@ -27,7 +27,6 @@ class Frame //extends Car {
 
         this.doorHinges = new Cylinder(this.gl, this.camera, {red:0.9, green: 0.7, blue:0.1, alpha:1}, false);
         this.doorHinges.init('my-vertex-shader', 'my-fragment-shader');
-
 
     }
 

@@ -35,7 +35,7 @@ class MetalCube {
             console.log('Feil ved initialisering av metalCubeShaderProgram');
         }
         else{
-            console.log("Initializing cube")
+            console.log("Initializing MetalCube")
             this.initBuffers();
         }
     }

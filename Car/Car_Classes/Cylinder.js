@@ -34,7 +34,7 @@ class Cylinder{
             console.log('Feil ved initialisering av metalCubeShaderProgram');
         }
         else{
-            console.log("Initializing cube")
+            console.log("Initializing Cylinder")
             this.initBuffers();
         }
     }
@@ -81,10 +81,10 @@ class Cylinder{
         this.getTorsoIndexes();
         this.getCircleIndexes();
 
-        console.log(this.circleVertices);
-        console.log(this.torsoIndexes);
-        console.log(this.circleIndexes1);
-        console.log(this.circleIndexes2);
+        // console.log(this.circleVertices);
+        // console.log(this.torsoIndexes);
+        // console.log(this.circleIndexes1);
+        // console.log(this.circleIndexes2);
 
         this.circleFloat32Vertices = new Float32Array(this.circleVertices);
         this.floatCircleIndexes1 = new Uint16Array(this.circleIndexes1);

@@ -32,8 +32,8 @@ class LeftWheel{
         this.roundTheMiddleTire = new MetalCube(this.gl, this.camera, {red:0.5, green: 0.5, blue:0.5, alpha:1});
         this.roundTheMiddleTire.init('metalcube-vertex-shader', 'metalcube-fragment-shader');
 
-        //this.rod = new Cylinder(this.gl, this.camera, {red:0.3, green:0.9, blue:0.5, alpha:1});
-        //this.rod.initBuffers();
+        this.bremser = new Torus(this.gl, this.camera, {red:0.3, green: 0.3, blue: 0.3, alpha: 1}, true);
+        this.bremser.init('my-vertex-shader', 'my-fragment-shader');
     }
 
     handleKeys(currentlyPressedKey){
@@ -74,7 +74,5 @@ class LeftWheel{
             modelMatrix.scale(3, 5.8, 0.5);
             this.roundTheMiddleTire.draw(0, modelMatrix);
         }
-
     }
-
 }

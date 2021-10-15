@@ -5,7 +5,7 @@ class CubeTransparent {
         this.gl = gl;
         this.camera = camera;
         if(!color)
-            this.color={red:0.2, green:0.5, blue: 0.5, alpha:0.5};
+            this.color={red:0.2, green:0.5, blue: 0.5, alpha:1};
         else
             this.color = color;
         this.vertexBufferCube = null;
@@ -35,13 +35,12 @@ class CubeTransparent {
             console.log('Feil ved initialisering av metalCubeShaderProgram');
         }
         else{
-            console.log("Initializing cube")
+            console.log("Initializing CubeTransparent")
             this.initBuffers();
         }
     }
 
     initBuffers(){
-
         this.cubeVertices = new Float32Array([
             -1, 1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
             -1, -1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
@@ -230,11 +229,13 @@ class CubeTransparent {
             this.gl.drawElements(this.gl.TRIANGLE_STRIP, this.triangleStripIndices2.length, this.gl.UNSIGNED_SHORT, 0);
             this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer3);
             this.gl.drawElements(this.gl.TRIANGLE_STRIP, this.triangleStripIndices3.length, this.gl.UNSIGNED_SHORT, 0);
+
+            //this.gl.clear(this.gl.COLOR_BUFFER_BIT); //
             this.gl.enable(this.gl.DEPTH_TEST);
-            this.gl.depthFunc(this.gl.LEQUAL)
+            this.gl.depthFunc(this.gl.LESS) //
             //this.gl.depthMask(false);
-            //this.gl.enable(this.gl.BLEND);
-            //this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+            this.gl.enable(this.gl.BLEND);
+            this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
             this.gl.depthFunc(this.gl.DEPTH_TEST)
         }
 

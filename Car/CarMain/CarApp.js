@@ -1,7 +1,11 @@
-/*
+/**
 GRUPPE OPPGAVE AV:
-    Nancy Agapito Lacsamana, Halil Ibrahim Keser, Asbjørn Bjørge
- */
+
+    Nancy Agapito Lacsamana, Halil Ibrahim Keser og Asbjørn Bjørge.
+
+    Oktober 2021. UIT, Campus Narvik
+ -----------------------------------------------------------------
+ **/
 
 
 "use strict";
@@ -44,13 +48,13 @@ class CarApp{
             return;
         }*/
         /*****TEST AV LYS PÅ CUBE****/
-        /*let cubeVertexShaderSource = document.getElementById('cube-vertex-shader').innerHTML;
-        let cubeFragmentShaderSource = document.getElementById('cube-fragment-shader').innerHTML;
-        this.gl.cubeShaderProgram = createProgram(this.gl, cubeVertexShaderSource, cubeFragmentShaderSource);
-        if (!this.gl.cubeShaderProgram) {
-            console.log('Feil ved initialisering av shaderkoden. Sjekk shaderkoden.');
-            return;
-        }*/
+        // let cubeVertexShaderSource = document.getElementById('metalcube-vertex-shader').innerHTML;
+        // let cubeFragmentShaderSource = document.getElementById('metalcube-fragment-shader').innerHTML;
+        // this.gl.cubeShaderProgram = createProgram(this.gl, cubeVertexShaderSource, cubeFragmentShaderSource);
+        // if (!this.gl.cubeShaderProgram) {
+        //     console.log('Feil ved initialisering av shaderkoden. Sjekk shaderkoden.');
+        //     return;
+        // }
         /*****TEST AV LYS PÅ CUBE*****/
 
         this.gl.enable(this.gl.DEPTH_TEST);
@@ -105,32 +109,24 @@ class CarApp{
         this.car.handleKeys(this.currentlyPressedKeys);
 
         if(this.currentlyPressedKeys[74]){
-            // J is pressed = positiv rotasjon y-aksen til bikeFront
+            // J is pressed = positiv rotasjon y-aksen
             if(this.currentlyPressedKeys[70]){
                 this.rotateY += 1;
             }
         }
         if(this.currentlyPressedKeys[75]){
+            // K is pressed = negativ rotasjon y-aksen
             if(this.currentlyPressedKeys[71]){
                 this.rotateY -= 1;
             }
         }
         if (this.currentlyPressedKeys[70]){
             //F is pressed
-            /*if (this.currentlyPressedKeys[74]){
-                this.translateZ -=1;
-                this.translateX -=1;
-            } else {
-                this.translateX += 1;
-            }*/
             this.translateX +=1;
         }
         if (this.currentlyPressedKeys[71]){
             //G is pressed = roter hjula bakover = positiv rotasjon z-aksen
             this.translateX -= 1;
-            /*if(this.currentlyPressedKeys[75]){
-                this.translateZ += 1;
-            }*/
         }
     }
 
@@ -159,10 +155,7 @@ class CarApp{
         //console.log("CAR LOG: " + modelMatrix2);
 
         modelMatrix2.setTranslate(this.translateX, this.translateY, this.translateZ);
-        //modelMatrix2.rotate(this.rotateX, 1, 0, 0);
         modelMatrix2.rotate(this.rotateY, 0, 1, 0);
-        //modelMatrix2.rotate(this.rotateZ, 0, 0, 1);
-        //modelMatrix2.scale(this.scaleX, this.scaleY, this.scaleZ);
 
         this.car.draw(elapsed, modelMatrix2);
 

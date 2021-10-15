@@ -17,6 +17,9 @@ class Car {
         this.swingRotation = 0;
         this.backWheelRotation = 0;
         this.doorRotation = 0;
+
+        //Transparent kan styres her fra
+        this.transparencyAlphaValue = 0.7;
     }
 
     initBuffers(){
@@ -74,15 +77,29 @@ class Car {
             this.backWheelRotation += 1;
         }
         if (currentlyPressedKey[79]){
-            //O is pressed = roter hjula framover = negativ rotasjon z-aksen
+            //O is pressed = lukker dør
             if(this.doorRotation !== 0){
                 this.doorRotation -= 1;
             }
         }
         if (currentlyPressedKey[80]){
-            //P is pressed = roter hjula bakover = positiv rotasjon z-aksen
+            //P is pressed = åpner dør
             if(this.doorRotation !== 120){
                 this.doorRotation += 1;
+            }
+        }
+        if (currentlyPressedKey[77]){
+            //M is pressed = verdi for gjennomsiktighet
+            if(this.transparencyAlphaValue <= 1.0){
+                this.transparencyAlphaValue += 0.01;
+                console.log("Transparency: = %f",  this.transparencyAlphaValue);
+            }
+        }
+        if (currentlyPressedKey[78]){
+            //N is pressed = verdi for gjennomsiktighet
+            if(this.transparencyAlphaValue > 0.0){
+                this.transparencyAlphaValue -= 0.01;
+                console.log("Transparency: = %f",  this.transparencyAlphaValue);
             }
         }
     }
