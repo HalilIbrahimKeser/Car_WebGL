@@ -181,6 +181,14 @@ class CarApp{
             this.car3x -= 2;
             this.car4x -=1;
         }
+        if (this.currentlyPressedKeys[90]){
+            //G is pressed = roter hjula bakover = positiv rotasjon z-aksen
+            this.showOtherCars = true;
+        }
+        if (this.currentlyPressedKeys[88]){
+            //G is pressed = roter hjula bakover = positiv rotasjon z-aksen
+            this.showOtherCars = false;
+        }
     }
 
     draw(currentTime) {
