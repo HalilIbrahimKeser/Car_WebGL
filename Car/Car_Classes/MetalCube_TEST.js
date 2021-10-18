@@ -1,6 +1,6 @@
 "use strict";
 
-class MetalCube {
+class MetalCube_TEST {
     constructor(gl, camera, color) {
         this.gl = gl;
         this.camera = camera;
@@ -44,57 +44,71 @@ class MetalCube {
     initBuffers(){
 
         this.cubeVertices = new Float32Array([
+            // Forsiden:
             -1, 1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
             -1, -1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
-            1, 1, 1,  this.color.red, this.color.green, this.color.blue, this.color.alpha,
             1, -1, 1,  this.color.red, this.color.green, this.color.blue, this.color.alpha,
-            1, 1, -1,  this.color.red, this.color.green, this.color.blue, this.color.alpha,
+
+            -1, 1, 1,  this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            1, -1, 1,  this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            1, 1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+
+            // Høyre side
+            1, 1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            1, -1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
             1, -1, -1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+
+            1, 1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            1, -1, -1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            1, 1, -1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+
+            // Baksiden:
+            1, -1, -1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            -1, -1, -1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            1, 1, -1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+
+            -1, -1, -1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
             -1, 1, -1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
-            -1, -1, -1, this.color.red, this.color.green, this.color.blue, this.color.alpha
-        ]);
+            1, 1, -1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
 
-        this.triangleStripIndices = new Uint16Array([
-            0, 1, 2,
-            3, 4, 5,
-            6, 7, 0,
-            1
+            // Venstre siden:
+            -1, -1, -1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            -1, 1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            -1, 1, -1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
 
-        ]);
+            -1, -1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            -1, 1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            -1, -1, -1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
 
-        this.triangleStripIndices2 = new Uint16Array([
-            0, 2, 6, 4
-        ]);
+            // Toppen:
+            -1, 1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            1, 1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            -1, 1, -1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
 
-        this.triangleStripIndices3 = new Uint16Array([
-            7, 1, 3, 5
+            -1, 1, -1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            1, 1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            1, 1, -1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+
+            // Under:
+            -1, -1, -1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            1, -1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            -1, -1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+
+            -1, -1, -1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            1, -1, -1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            1, -1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha
         ]);
 
         this.vertexBufferCube = this.gl.createBuffer();
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.vertexBufferCube);
         this.gl.bufferData(this.gl.ARRAY_BUFFER, this.cubeVertices, this.gl.STATIC_DRAW);
         this.vertexBufferCube.itemSize = 3;
+        this.vertexBufferCube.numberOfItems = 36;
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
-
-        this.indexBuffer = this.gl.createBuffer();
-        this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
-        this.gl.bufferData(this.gl.ELEMENT_ARRAY_BUFFER, this.triangleStripIndices, this.gl.STATIC_DRAW);
-
-
-        this.indexBuffer2 = this.gl.createBuffer();
-        this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer2);
-        this.gl.bufferData(this.gl.ELEMENT_ARRAY_BUFFER, this.triangleStripIndices2, this.gl.STATIC_DRAW);
-
-
-        this.indexBuffer3 = this.gl.createBuffer();
-        this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer3);
-        this.gl.bufferData(this.gl.ELEMENT_ARRAY_BUFFER, this.triangleStripIndices3, this.gl.STATIC_DRAW);
-
-        this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, null);
 
         /****TEST AV LYS!!****/
         // NORMALVEKTORER:
-        /*var cubeNormals = new Float32Array([
+        var cubeNormals = new Float32Array([
             //Forsiden:
             0.0, 0.0, 1.0,
             0.0, 0.0, 1.0,
@@ -155,7 +169,7 @@ class MetalCube {
         this.gl.bufferData(this.gl.ARRAY_BUFFER, cubeNormals, this.gl.STATIC_DRAW);
         this.cubeNormalBuffer.itemSize = 3;
         this.cubeNormalBuffer.numberOfItems = 36;
-        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);*/
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
         /****SLUTT AV TEST AV LYS!!****/
     }
 
@@ -183,7 +197,7 @@ class MetalCube {
 
         /*******TEST AV LYS*******/
         // Normalvektor:
-        /*this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.cubeNormalBuffer);
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.cubeNormalBuffer);
         let a_Normal = this.gl.getAttribLocation(this.metalCubeShaderProgram, 'a_Normal');
         if (a_Normal !== -1) {  //-1 dersom a_Normal ikke er i bruk i shaderen.
             this.gl.vertexAttribPointer(a_Normal, this.cubeNormalBuffer.itemSize, this.gl.FLOAT, false, 0, 0);
@@ -200,7 +214,8 @@ class MetalCube {
 
         this.gl.uniform3fv(u_lightDirection, this.lightDirection);
         this.gl.uniform3fv(u_AmbientLightColor, this.ambientLightColor);
-        this.gl.uniform3fv(u_DiffuseLightColor, this.diffuseLightColor);*/
+        this.gl.uniform3fv(u_DiffuseLightColor, this.diffuseLightColor);
+
         /****SLUTT AV TEST AV LYS!!****/
 
 
@@ -211,12 +226,12 @@ class MetalCube {
 
         /*******TEST AV LYS*******/
         //Beregner og sender inn matrisa som brukes til å transformere normalvektorene:
-       /* let normalMatrix = mat3.create();
-        mat3.normalFromMat4(normalMatrix, modelMatrix.elements);  //NB!!! mat3.normalFromMat4! SE: gl-matrix.js
-        this.gl.uniformMatrix3fv(u_normalMatrix, false, normalMatrix);*/
+         let normalMatrix = mat3.create();
+         mat3.normalFromMat4(normalMatrix, modelMatrix.elements);  //NB!!! mat3.normalFromMat4! SE: gl-matrix.js
+         this.gl.uniformMatrix3fv(u_normalMatrix, false, normalMatrix);
         /****SLUTT AV TEST AV LYS!!****/
 
-        if (this.wireFrame){
+        /*if (this.wireFrame){
             this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
             this.gl.drawElements(this.gl.LINE_LOOP, this.triangleStripIndices.length, this.gl.UNSIGNED_SHORT, 0);
             this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer2);
@@ -236,7 +251,8 @@ class MetalCube {
             //this.gl.enable(this.gl.BLEND);
             //this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
             this.gl.depthFunc(this.gl.DEPTH_TEST)
-        }
+        }*/
+
 
     }
 }
