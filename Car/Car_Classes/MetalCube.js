@@ -94,7 +94,7 @@ class MetalCube {
 
         /****TEST AV LYS!!****/
         // NORMALVEKTORER:
-        /*var cubeNormals = new Float32Array([
+        var cubeNormals = new Float32Array([
             //Forsiden:
             0.0, 0.0, 1.0,
             0.0, 0.0, 1.0,
@@ -155,7 +155,7 @@ class MetalCube {
         this.gl.bufferData(this.gl.ARRAY_BUFFER, cubeNormals, this.gl.STATIC_DRAW);
         this.cubeNormalBuffer.itemSize = 3;
         this.cubeNormalBuffer.numberOfItems = 36;
-        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);*/
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
         /****SLUTT AV TEST AV LYS!!****/
     }
 
@@ -183,7 +183,7 @@ class MetalCube {
 
         /*******TEST AV LYS*******/
         // Normalvektor:
-        /*this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.cubeNormalBuffer);
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.cubeNormalBuffer);
         let a_Normal = this.gl.getAttribLocation(this.metalCubeShaderProgram, 'a_Normal');
         if (a_Normal !== -1) {  //-1 dersom a_Normal ikke er i bruk i shaderen.
             this.gl.vertexAttribPointer(a_Normal, this.cubeNormalBuffer.itemSize, this.gl.FLOAT, false, 0, 0);
@@ -200,7 +200,7 @@ class MetalCube {
 
         this.gl.uniform3fv(u_lightDirection, this.lightDirection);
         this.gl.uniform3fv(u_AmbientLightColor, this.ambientLightColor);
-        this.gl.uniform3fv(u_DiffuseLightColor, this.diffuseLightColor);*/
+        this.gl.uniform3fv(u_DiffuseLightColor, this.diffuseLightColor);
         /****SLUTT AV TEST AV LYS!!****/
 
 
@@ -211,9 +211,9 @@ class MetalCube {
 
         /*******TEST AV LYS*******/
         //Beregner og sender inn matrisa som brukes til å transformere normalvektorene:
-       /* let normalMatrix = mat3.create();
+        let normalMatrix = mat3.create();
         mat3.normalFromMat4(normalMatrix, modelMatrix.elements);  //NB!!! mat3.normalFromMat4! SE: gl-matrix.js
-        this.gl.uniformMatrix3fv(u_normalMatrix, false, normalMatrix);*/
+        this.gl.uniformMatrix3fv(u_normalMatrix, false, normalMatrix);
         /****SLUTT AV TEST AV LYS!!****/
 
         if (this.wireFrame){
