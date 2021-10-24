@@ -35,7 +35,6 @@ class LeftBackDoorVariation extends Car {
 
     draw(elapsed, modelMatrix){
         // HUSK: I*T*O*R*S  der O = R * T  dvs I T R T R S
-        //modelMatrix.setIdentity();
         this.stack.pushMatrix(modelMatrix);
 
         //door frame

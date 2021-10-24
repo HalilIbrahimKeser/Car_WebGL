@@ -7,6 +7,8 @@
 		Vi har bygd på sykkel oppgaven i WebGL som grunnlag og jobbet videre med den.-->
 <!--	KILDER: -->
 <!-- Del10, CubeDiffuseSun1.js, CubeDiffuseSun1.html -->
+<!-- Tidligere sykkeloppgave på WebGl -->
+<!-- Camera, Stack og Coord.js hentet fra tdiligere WebGl eksempler -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,9 +25,6 @@
 	<div id="rotantion-angle">
 		Styrevinkel: <span id="angle">--</span>
 	</div>
-<!--	<div id="rotantion-velocity">-->
-<!--		Hastighet: <span id="velocity * (-1)">&#45;&#45;</span>-->
-<!--	</div>-->
 
 	<div >
 		WASD for å rotere kamera.<br>
@@ -35,11 +34,8 @@
 		JK for å rotere framhjulene mot høyre/venstre<br>
 		OP for å åpne og lukke dører<br>
 		NM for gjennomsiktighet <br>
+		ZX for surprise! <br>
 	</div>
-
-	<!--<div>
-		<button id="moreCars" style="background-color: darkturquoise; font-size: large; padding: 20px;">Traffic</button>
-	</div>-->
 
 	<div id="fps-counter">
 		<br>FPS: <span id="fps">--</span><br>
@@ -59,10 +55,7 @@
 	<script src="Car_Classes/Cube.js"></script>
 	<script src="Car_Classes/CoordinateAxis.js"></script>
 	<script src="Car_Classes/Cylinder.js"></script>
-	<script src="Car_Classes/Circle.js"></script>
 	<script src="Car_Classes/Torus.js"></script>
-	<script src="Car_Classes/Frame.js"></script>
-	<script src="Car_Classes/CircleLines.js"></script>
 	<script src="Car_Classes/Lines.js"></script>
 	<script src="Car_Classes/Chassis.js"></script>
 	<script src="Car_Classes/RightWheel.js"></script>
@@ -73,10 +66,6 @@
 	<script src="Car_Classes/MetalCubeLight.js"></script>
 	<script src="Car_Classes/ShinyCube.js"></script>
 	<script src="Car_Classes/CubeTransparent.js"></script>
-	<script src="Car_Classes/LeftDoor.js"></script>
-	<script src="Car_Classes/LeftDoorBack.js"></script>
-	<script src="Car_Classes/RightDoor.js"></script>
-	<script src="Car_Classes/RightDoorBack.js"></script>
 	<script src="Car_Classes/Steering.js"></script>
 	<script src="Car_Classes/FrameOpaque.js"></script>
 	<script src="Car_Classes/LeftDoorVariation.js"></script>
@@ -101,49 +90,6 @@
 		varying vec4 v_Color;
 		void main() {
 			gl_FragColor = v_Color;
-		}
-	</script>
-
-	<!-- CUBE SHADERS -->
-	<script id="metalcube-vertex-shader" type="x-shader/x-vertex">
-		attribute vec3 a_Position;
-		attribute vec3 a_Normal;    //Normalvektor.
-		attribute vec4 a_Color;
-
-		uniform mat3 u_normalMatrix;    //Transformerer normalvektoren vha. denne.
-		uniform vec3 u_lightDirection;    //Lysets retning.
-		uniform vec3 u_ambientLightColor;
-		uniform vec3 u_diffuseLightColor;
-		uniform mat4 u_modelviewMatrix;
-		uniform mat4 u_projectionMatrix;
-
-		varying vec4 v_Color;
-		varying vec3 v_LightWeighting;
-		void main() {
-			//Transformer normalvektoren til world-koordinater:
-			vec3 normal = normalize(u_normalMatrix * a_Normal);
-
-			//NB! Lysvektoren må normaliseres:
-			vec3 lightDirectionNorm = normalize(u_lightDirection);
-
-			//Beregn prikkprodukt av lysvektor og normalvektor
-			//for diffus belysning:
-			float diffusLightWeightning = max(dot(normal, lightDirectionNorm), 0.0);
-
-
-			//Summer alle refleksjonskomponenter og send til fragmentshader:
-			v_LightWeighting = u_ambientLightColor + (u_diffuseLightColor * diffusLightWeightning);
-
-			gl_Position = u_projectionMatrix * u_modelviewMatrix * vec4(a_Position,1.0);
-			v_Color = a_Color;
-		}
-	</script>
-	<script id="metalcube-fragment-shader" type="x-shader/x-fragment">
-		precision mediump float;
-		varying vec3 v_LightWeighting;
-		varying vec4 v_Color;
-		void main() {
-			gl_FragColor = vec4(v_LightWeighting.rgb, 1.0);
 		}
 	</script>
 

@@ -19,10 +19,8 @@ class MetalCube {
         this.cubeVertices = null;
 
         this.lightDirection = [5, -10, 0];
-        //let lightDirection = [1.0, 0.0, 0.0];
         this.ambientLightColor = [this.color.red, this.color.green, this.color.blue];
         this.diffuseLightColor = [1.0, 1.0, 1.0];
-
         this.cubeNormalBuffer = null;
 
     }
@@ -232,9 +230,7 @@ class MetalCube {
             this.gl.drawElements(this.gl.TRIANGLE_STRIP, this.triangleStripIndices3.length, this.gl.UNSIGNED_SHORT, 0);
             this.gl.enable(this.gl.DEPTH_TEST);
             this.gl.depthFunc(this.gl.LEQUAL)
-            //this.gl.depthMask(false);
-            //this.gl.enable(this.gl.BLEND);
-            //this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+
             this.gl.depthFunc(this.gl.DEPTH_TEST)
         }
 

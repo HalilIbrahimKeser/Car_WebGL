@@ -44,13 +44,9 @@ class FrameOpaque extends Car {
 
     draw(elapsed, modelMatrix){
         // HUSK: I*T*O*R*S  der O = R * T
-        //modelMatrix.setIdentity();
         this.stack.pushMatrix(modelMatrix);
 
         //front
-        //this.stack.peekMatrix(modelMatrix);
-        //modelMatrix.translate(44.5, 21.5, 0);
-        //modelMatrix.rotate(-80, 0, 0, 1);
         modelMatrix.translate(10, -3, 0);
         modelMatrix.rotate(8, 0, 0, 1);
         modelMatrix.scale(0.9, 15, 30);
