@@ -22,11 +22,11 @@ class LeftBackDoorVariation extends Car {
     }
 
     initBuffers(){
-        this.door = new CubeTransparent(this.gl, this.camera, {red:this.color.red, green: this.color.green, blue: this.color.blue, alpha: this.transparency}, false);
-        this.door.init('my-vertex-shader', 'my-fragment-shader');
+        this.door = new MetalCubeLight(this.gl, this.camera, {red:this.color.red, green: this.color.green, blue: this.color.blue, alpha: this.transparency}, false);
+        this.door.init('metalcubelight-vertex-shader', 'metalcubelight-fragment-shader');
 
-        this.handle = new CubeTransparent(this.gl, this.camera, {red:this.doorHandle.red, green: this.doorHandle.green, blue: this.doorHandle.blue, alpha: this.transparency}, false);
-        this.handle.init('my-vertex-shader', 'my-fragment-shader');
+        this.handle = new MetalCubeLight(this.gl, this.camera, {red:this.doorHandle.red, green: this.doorHandle.green, blue: this.doorHandle.blue, alpha: this.transparency}, false);
+        this.handle.init('metalcubelight-vertex-shader', 'metalcubelight-fragment-shader');
     }
 
     handleKeys(currentlyPressedKey){

@@ -1,6 +1,6 @@
 "use strict";
 
-class MetalCube_TEST {
+class MetalCubeLight {
     constructor(gl, camera, color) {
         this.gl = gl;
         this.camera = camera;
@@ -9,22 +9,15 @@ class MetalCube_TEST {
         else
             this.color = color;
         this.vertexBufferCube = null;
-        this.wireFrame = false;
-        this.triangleStripIndices = null;
-        this.triangleStripIndices2 = null;
-        this.triangleStripIndices3 = null;
-        this.indexBuffer = null;
-        this.indexBuffer2 = null;
-        this.indexBuffer3 = null;
         this.cubeVertices = null;
 
-        this.lightDirection = [5, -10, 0];
-        //let lightDirection = [1.0, 0.0, 0.0];
+        this.lightDirection = [0, 20, 50];
         this.ambientLightColor = [this.color.red, this.color.green, this.color.blue];
-        this.diffuseLightColor = [1.0, 1.0, 1.0];
+        this.diffuseLightColor = [0.5, 0.5, 0.5];
 
         this.cubeNormalBuffer = null;
 
+        this.wireFrame = false;
     }
 
     init(vertexShaderName, fragmentShaderName){
@@ -47,10 +40,10 @@ class MetalCube_TEST {
             // Forsiden:
             -1, 1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
             -1, -1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
-            1, -1, 1,  this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            1, -1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
 
-            -1, 1, 1,  this.color.red, this.color.green, this.color.blue, this.color.alpha,
-            1, -1, 1,  this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            -1, 1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
+            1, -1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
             1, 1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
 
             // Høyre side
@@ -231,28 +224,10 @@ class MetalCube_TEST {
          this.gl.uniformMatrix3fv(u_normalMatrix, false, normalMatrix);
         /****SLUTT AV TEST AV LYS!!****/
 
-        /*if (this.wireFrame){
-            this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
-            this.gl.drawElements(this.gl.LINE_LOOP, this.triangleStripIndices.length, this.gl.UNSIGNED_SHORT, 0);
-            this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer2);
-            this.gl.drawElements(this.gl.LINE_LOOP, this.triangleStripIndices2.length, this.gl.UNSIGNED_SHORT, 0);
-            this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer3);
-            this.gl.drawElements(this.gl.LINE_LOOP, this.triangleStripIndices3.length, this.gl.UNSIGNED_SHORT, 0);
+        if (this.wireFrame) {
+            this.gl.drawArrays(this.gl.LINE_STRIP, 0, this.vertexBufferCube.numberOfItems);
         } else {
-            this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
-            this.gl.drawElements(this.gl.TRIANGLE_STRIP, this.triangleStripIndices.length, this.gl.UNSIGNED_SHORT, 0);
-            this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer2);
-            this.gl.drawElements(this.gl.TRIANGLE_STRIP, this.triangleStripIndices2.length, this.gl.UNSIGNED_SHORT, 0);
-            this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer3);
-            this.gl.drawElements(this.gl.TRIANGLE_STRIP, this.triangleStripIndices3.length, this.gl.UNSIGNED_SHORT, 0);
-            this.gl.enable(this.gl.DEPTH_TEST);
-            this.gl.depthFunc(this.gl.LEQUAL)
-            //this.gl.depthMask(false);
-            //this.gl.enable(this.gl.BLEND);
-            //this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
-            this.gl.depthFunc(this.gl.DEPTH_TEST)
-        }*/
-
-
+            this.gl.drawArrays(this.gl.TRIANGLES, 0, this.vertexBufferCube.numberOfItems);
+        }
     }
 }

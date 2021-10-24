@@ -6,6 +6,7 @@
 <!--	Gruppe oppgave av Halil Ibrahim Keser, Nancy Agapito Nacsamana, Asbjørn Bjørge.
 		Vi har bygd på sykkel oppgaven i WebGL som grunnlag og jobbet videre med den.-->
 <!--	KILDER: -->
+<!-- Del10, CubeDiffuseSun1.js, CubeDiffuseSun1.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,7 +70,7 @@
 	<script src="CarMain/CarApp.js"></script>
 	<script src="Car_Classes/Seat.js"></script>
 	<script src="Car_Classes/MetalCube.js"></script>
-	<script src="Car_Classes/MetalCube_TEST.js"></script>
+	<script src="Car_Classes/MetalCubeLight.js"></script>
 	<script src="Car_Classes/ShinyCube.js"></script>
 	<script src="Car_Classes/CubeTransparent.js"></script>
 	<script src="Car_Classes/LeftDoor.js"></script>
@@ -145,6 +146,48 @@
 			gl_FragColor = vec4(v_LightWeighting.rgb, 1.0);
 		}
 	</script>
+
+<!-- CUBE SHADERS -->
+<script id="metalcubelight-vertex-shader" type="x-shader/x-vertex">
+	    attribute vec3 a_Position;
+		attribute vec3 a_Normal;    //Normalvektor.
+
+		uniform mat3 u_normalMatrix;    //Transformerer normalvektoren vha. denne.
+		uniform mat4 u_modelviewMatrix;
+		uniform mat4 u_projectionMatrix;
+
+		uniform vec3 u_lightDirection;    //Lysets retning.
+		uniform vec3 u_ambientLightColor;
+		uniform vec3 u_diffuseLightColor;
+
+		varying vec3 v_LightWeighting;
+
+		void main() {
+
+			//Transformer normalvektoren til world-koordinater:
+			vec3 normal = normalize(u_normalMatrix * a_Normal);
+
+			//NB! Lysvektoren må normaliseres:
+			vec3 lightDirectionNorm = normalize(u_lightDirection);
+			//Beregn prikkprodukt av lysvektor og normalvektor
+			//for diffus belysning:
+			float diffusLightWeightning = max(dot(normal, lightDirectionNorm), 0.0);
+
+			//Summer alle refleksjonskomponenter og send til fragmentshader:
+			v_LightWeighting = u_ambientLightColor + (u_diffuseLightColor * diffusLightWeightning);
+
+			//Transformer vertex:
+			gl_Position = u_projectionMatrix * u_modelviewMatrix * vec4(a_Position, 1.0);
+		}
+    </script>
+<script id="metalcubelight-fragment-shader" type="x-shader/x-fragment">
+    	precision mediump float;
+		varying vec3 v_LightWeighting;
+
+		void main() {
+ 			gl_FragColor = vec4(v_LightWeighting.rgb, 1.0);
+		}
+    </script>
 
 	<script id="reflectioncube-vertex-shader" type="x-shader/x-vertex">
 		attribute vec3 a_Position;

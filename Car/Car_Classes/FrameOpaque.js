@@ -24,8 +24,8 @@ class FrameOpaque extends Car {
     }
 
     initBuffers(){
-        this.carFrame = new CubeTransparent(this.gl, this.camera, {red:this.color.red, green: this.color.green, blue: this.color.blue, alpha: this.transparency}, false);
-        this.carFrame.init('my-vertex-shader', 'my-fragment-shader');
+        this.carFrame = new MetalCubeLight(this.gl, this.camera, {red:this.color.red, green: this.color.green, blue: this.color.blue, alpha: this.transparency}, false);
+        this.carFrame.init('metalcubelight-vertex-shader', 'metalcubelight-fragment-shader');
 
         this.chassisOverlag = new CubeTransparent(this.gl, this.camera, {red:0.372, green: 0.239, blue: 0.420, alpha: this.transparency}, false);
         this.chassisOverlag.init('my-vertex-shader', 'my-fragment-shader');
