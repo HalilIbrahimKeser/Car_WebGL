@@ -159,7 +159,7 @@ class MetalCubeLight {
             0.0, -1.0, 0.0
         ]);
 
-        // Buffer og binder nomals arrayet
+        // Buffer og binder normals arrayet
         this.cubeNormalBuffer = this.gl.createBuffer();
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.cubeNormalBuffer);
         this.gl.bufferData(this.gl.ARRAY_BUFFER, cubeNormals, this.gl.STATIC_DRAW);
