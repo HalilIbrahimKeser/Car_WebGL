@@ -36,6 +36,8 @@ class FrameOpaque extends Car {
         this.doorHinges = new Cylinder(this.gl, this.camera, {red:0.9, green: 0.7, blue:0.1, alpha:this.transparency}, false);
         this.doorHinges.init('my-vertex-shader', 'my-fragment-shader');
 
+
+
     }
 
     handleKeys(currentlyPressedKey){
@@ -51,6 +53,13 @@ class FrameOpaque extends Car {
         modelMatrix.rotate(8, 0, 0, 1);
         modelMatrix.scale(0.9, 15, 30);
         this.carFrame.draw(elapsed, modelMatrix);
+
+        //windshield
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(-45, 25, 0);
+        modelMatrix.rotate(15, 0, 0, 1);
+        modelMatrix.scale(1, 16, 33);
+        this.window.draw(elapsed, modelMatrix);
 
         //frontsideright
         modelMatrix = this.stack.peekMatrix();
