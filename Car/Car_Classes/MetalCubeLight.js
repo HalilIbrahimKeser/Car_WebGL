@@ -11,6 +11,7 @@ class MetalCubeLight {
         this.vertexBufferCube = null;
         this.cubeVertices = null;
 
+        // Satt retningen lyset kommer fra
         this.lightDirection = [0, 20, 50];
         this.ambientLightColor = [this.color.red, this.color.green, this.color.blue];
         this.diffuseLightColor = [0.5, 0.5, 0.5];
@@ -36,6 +37,7 @@ class MetalCubeLight {
 
     initBuffers(){
 
+        // Array med cubes og farge.
         this.cubeVertices = new Float32Array([
             // Forsiden:
             -1, 1, 1, this.color.red, this.color.green, this.color.blue, this.color.alpha,
@@ -99,8 +101,8 @@ class MetalCubeLight {
         this.vertexBufferCube.numberOfItems = 36;
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
 
-        /****TEST AV LYS!!****/
         // NORMALVEKTORER:
+        // Array med cube normals tilhørende posisjons array
         var cubeNormals = new Float32Array([
             //Forsiden:
             0.0, 0.0, 1.0,
@@ -157,13 +159,13 @@ class MetalCubeLight {
             0.0, -1.0, 0.0
         ]);
 
+        // Buffer og binder nomals arrayet
         this.cubeNormalBuffer = this.gl.createBuffer();
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.cubeNormalBuffer);
         this.gl.bufferData(this.gl.ARRAY_BUFFER, cubeNormals, this.gl.STATIC_DRAW);
         this.cubeNormalBuffer.itemSize = 3;
         this.cubeNormalBuffer.numberOfItems = 36;
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
-        /****SLUTT AV TEST AV LYS!!****/
     }
 
     handleKeys(elapsed){
@@ -188,7 +190,6 @@ class MetalCubeLight {
         this.gl.vertexAttribPointer(a_Color, colorVertexSize, this.gl.FLOAT, false, stride, colorOffset);
         this.gl.enableVertexAttribArray(a_Color);
 
-        /*******TEST AV LYS*******/
         // Normalvektor:
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.cubeNormalBuffer);
         let a_Normal = this.gl.getAttribLocation(this.metalCubeShaderProgram, 'a_Normal');
@@ -209,20 +210,15 @@ class MetalCubeLight {
         this.gl.uniform3fv(u_AmbientLightColor, this.ambientLightColor);
         this.gl.uniform3fv(u_DiffuseLightColor, this.diffuseLightColor);
 
-        /****SLUTT AV TEST AV LYS!!****/
-
-
         let modelviewMatrix = this.camera.getModelViewMatrix(modelMatrix);
 
         this.gl.uniformMatrix4fv(u_modelviewMatrix, false, modelviewMatrix.elements);
         this.gl.uniformMatrix4fv(u_projectionMatrix, false, this.camera.projectionMatrix.elements);
 
-        /*******TEST AV LYS*******/
         //Beregner og sender inn matrisa som brukes til å transformere normalvektorene:
          let normalMatrix = mat3.create();
-         mat3.normalFromMat4(normalMatrix, modelMatrix.elements);  //NB!!! mat3.normalFromMat4! SE: gl-matrix.js
+         mat3.normalFromMat4(normalMatrix, modelMatrix.elements);
          this.gl.uniformMatrix3fv(u_normalMatrix, false, normalMatrix);
-        /****SLUTT AV TEST AV LYS!!****/
 
         if (this.wireFrame) {
             this.gl.drawArrays(this.gl.LINE_STRIP, 0, this.vertexBufferCube.numberOfItems);
