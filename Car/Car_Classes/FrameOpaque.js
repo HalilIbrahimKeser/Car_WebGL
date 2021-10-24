@@ -20,6 +20,8 @@ class FrameOpaque extends Car {
             this.color = color;
 
         this.transparency = transparency
+        this.windowtransparency = 0.4;
+        this.window = null;
 
     }
 
@@ -35,6 +37,9 @@ class FrameOpaque extends Car {
 
         this.doorHinges = new Cylinder(this.gl, this.camera, {red:0.9, green: 0.7, blue:0.1, alpha:this.transparency}, false);
         this.doorHinges.init('my-vertex-shader', 'my-fragment-shader');
+
+        this.window = new CubeTransparent(this.gl, this.camera, {red:0.3, green:0.3, blue: 0.3, alpha: this.windowtransparency}, false);
+        this.window.init('my-vertex-shader', 'my-fragment-shader');
 
     }
 
@@ -55,6 +60,12 @@ class FrameOpaque extends Car {
         modelMatrix.rotate(8, 0, 0, 1);
         modelMatrix.scale(0.9, 15, 30);
         this.carFrame.draw(elapsed, modelMatrix);
+
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(-45, 25, 0);
+        modelMatrix.rotate(15, 0, 0, 1);
+        modelMatrix.scale(1, 16, 33);
+        this.window.draw(elapsed, modelMatrix);
 
         //frontsideright
         modelMatrix = this.stack.peekMatrix();

@@ -36,6 +36,7 @@ class Car {
         this.transparencyAlphaValue = 0.7;
 
         this.transparencyValue = 100;
+
     }
 
     initBuffers(){
@@ -60,6 +61,7 @@ class Car {
         this.seat = new Seat(this.gl, this.camera);
         this.seat.initBuffers();
 
+
         //this.leftDoor = new LeftDoor(this.gl, this.camera);
         //this.leftDoor.initBuffers();
 
@@ -74,6 +76,8 @@ class Car {
 
         this.steering = new Steering(this.gl, this.camera);
         this.steering.initBuffers();
+
+
     }
 
     handleKeys(currentlyPressedKey){
