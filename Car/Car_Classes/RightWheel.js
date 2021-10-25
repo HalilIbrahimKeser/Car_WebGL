@@ -32,8 +32,8 @@ class RightWheel extends Car {
         this.middleCylinder = new Cylinder(this.gl, this.camera, {red:0.0, green: 0.2, blue:0.45, alpha:1});
         this.middleCylinder.init('my-vertex-shader', 'my-fragment-shader');
 
-        this.roundTheMiddleTire = new MetalCube(this.gl, this.camera, {red:0.5, green: 0.5, blue:0.5, alpha:1});
-        this.roundTheMiddleTire.init('metalcube-vertex-shader', 'metalcube-fragment-shader');
+        this.roundTheMiddleTire = new MetalCubeLight(this.gl, this.camera, {red:0.5, green: 0.5, blue:0.5, alpha:1});
+        this.roundTheMiddleTire.init('metalcubelight-vertex-shader', 'metalcubelight-fragment-shader');
 
         //this.rod = new Cylinder(this.gl, this.camera, {red:0.3, green:0.9, blue:0.5, alpha:1});
         //this.rod.initBuffers();
